@@ -1,4 +1,4 @@
-suod -v
+sudo -v
 
 source $HOME/import/packages.sh
 
