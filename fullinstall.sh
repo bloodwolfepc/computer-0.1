@@ -1,6 +1,7 @@
+host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 sudo -v
 
-source $HOME/import/packages.sh
+source $host/packages.sh
 
 install-pacman-packages
 #install-msi-dri
