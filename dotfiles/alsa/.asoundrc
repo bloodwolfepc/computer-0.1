@@ -1,0 +1,3 @@
+#used $ "aplay -l"
+defaults.pcm.card 3
+defualts.ctl.card 3

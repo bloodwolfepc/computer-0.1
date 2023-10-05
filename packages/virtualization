@@ -1,0 +1,8 @@
+qemu-full
+libvirt
+edk2-ovmf
+virt-manager
+virt-viewer
+swtpm
+iptables-nft
+dnsmasq
