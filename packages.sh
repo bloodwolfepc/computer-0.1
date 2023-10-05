@@ -1,5 +1,8 @@
+host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+
 install-pacman-packages() {
-    pacfile="$HOME/import/packages/pacman"
+    pacfile="$host/packages/pacman"
     if [ -f "$pacfile" ]; then
         sudo pacman -S --needed --noconfirm - < "$pacfile"
     else
@@ -8,7 +11,7 @@ install-pacman-packages() {
 }
 
 install-amd-dri() {
-    amdfile="$HOME/import/packages/amd-drivers"
+    amdfile="$host/packages/amd-drivers"
     if [ -f "$amdfile"]; then
         sudo pacman -S --needed --noconfirm - < "$amdfile"
     else
@@ -17,7 +20,7 @@ install-amd-dri() {
 }
 
 install-aur-packages() {
-    aurfile="$HOME/import/packages/aur"
+    aurfile="$host/packages/aur"
     if [ -f "$aurfile" ]; then
         yay -S --needed -noconfirm - < "$aurfile"
     else

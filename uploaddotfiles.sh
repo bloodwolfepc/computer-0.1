@@ -1,3 +1,5 @@
+host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 sudo -v
 
 dotfiles=(
@@ -22,7 +24,7 @@ dotfiles=(
     "/bin/custom/albumart.sh"
 )
 
-destination="$HOME/import/dotfiles/"
+destination="$host/dotfiles/"
 sudo mkdir -p "$destination"
 
 for file in "${dotfiles[@]}"; do 
