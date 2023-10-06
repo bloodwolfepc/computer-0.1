@@ -20,6 +20,7 @@ install-amd-dri() {
 }
 
 install-audio-dri() {
+    sudo pacman -R pipewire-media-session --noconfirm
     pacfile="$host/packages/audio-drivers"
     if [ -f "$pacfile" ]; then
         sudo pacman -S --needed --noconfirm - < "$pacfile"
@@ -40,7 +41,7 @@ install-emulator-packages() {
 install-emulator-aur-packages() {
     pacfile="$host/packages/emulators-aur"
     if [ -f "$pacfile" ]; then
-        sudo pacman -S --needed --noconfirm - < "$pacfile"
+        yay -S --needed --noconfirm - < "$pacfile"
     else
       echo "aur package file not found: $pacfile"
     fi
@@ -67,7 +68,7 @@ install-fonts() {
 install-fonts-aur() {
     pacfile="$host/packages/fonts-aur"
     if [ -f "$pacfile" ]; then
-        sudo pacman -S --needed --noconfirm - < "$pacfile"
+        yay -S --needed --noconfirm - < "$pacfile"
     else
       echo "aur package file not found: $pacfile"
     fi

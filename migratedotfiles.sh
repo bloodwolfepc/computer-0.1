@@ -22,12 +22,12 @@ migrate-dot-files() {
     cp $dotfiles/rofi/config.rasi $HOME/.config/rofi/config.rasi
     mkdir -p $HOME/.config/neofetch
     cp $dotfiles/neofetch/config.conf $HOME/.config/neofetch/config.conf
-    cp $dotfiles/bin/neofetch /usr/bin/neofetch
-    mkdir -p /bin/custom
-    cp -r $dotfiles/custom/* /bin/custom/
+    sudo cp $dotfiles/bin/neofetch /usr/bin/neofetch
+    sudo mkdir -p /bin/custom
+    sudo cp -r $dotfiles/custom/* /bin/custom/
 
     echo "dotfiles migrated"
 }
 
-
+sudo -k
 
