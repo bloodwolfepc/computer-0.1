@@ -4,6 +4,8 @@ sudo -v
 source $host/packages.sh
 source $host/migratedotfiles.sh
 
+sudo pacman -R pipewire-media-session
+
 #install-msi-dir
 install-pacman-packages
 install-yay
