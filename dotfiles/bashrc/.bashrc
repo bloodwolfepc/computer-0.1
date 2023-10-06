@@ -74,6 +74,17 @@ kittyconf() {
 	nvim ~/.config/kitty/kitty.conf
 }
 
+gtk3conf() {
+	nv ~/.config/gtk-3.0/settings.ini
+}
+
+gtk2conf() {
+	nv ~/.gtkrc-2.0
+}
+
+evcode() {
+	nv /usr/include/linux/input-event-codes.h
+}
 
 
 #ranger configs

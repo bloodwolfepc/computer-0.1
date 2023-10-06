@@ -35,6 +35,19 @@ bindsym $mod+shift+semicolon rofi -show drun
 # I COMMENTED THIS OUT output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 output * bg /home/bloodwolfe/wallpapers/3840x2160-black-solid-color-background.jpg fill
 
+#floating kitten
+
+bindsym $mod+m [title="floatingkitty"] scratchpad show
+for_window [title="floatingkitty"] border pixel 1 
+for_window [title="floatingkitty"] border_colors #ffffff
+
+#bindsym $mod+n [con_mark="kitty"] scratchpad show
+#exec_always kitty --name="hidden-floating-kitty" --hidden --keep-focus
+#bindsym $mod+n [instance="hidden-floating-kitty"] focus
+#for_window [instance="hidden-floating-kitty"] floating enable, focus, fullscreen
+
+
+
 #showmethekey support
 for_window [app_id="one.alynx.showmethekey" title="Floating Window - Show Me The Key"] {
   floating enable
@@ -188,10 +201,10 @@ for_window [title="discord-screenaudio"] move container to workspace 6
     #bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+    bindsym $mod+g fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+f+space floating toggle
 
     # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
@@ -205,11 +218,11 @@ for_window [title="discord-screenaudio"] move container to workspace 6
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+period move scratchpad
+    bindsym $mod+f+n move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+period scratchpad show
+    bindsym $mod+n scratchpad show
 #
 # Resizing containers:
 #
@@ -260,8 +273,11 @@ include /etc/sway/config.d/*
 ##personal customizatins
 
 default_border none
+default_floating_border pixel 1
 gaps inner 5
 gaps outer 5
+client.focused #ffffff #000000 #ffffff #000000 #ffffff
+
 ##default_border none
 ##hide_edge_borders both
 
@@ -270,7 +286,7 @@ seat seat0 xcursor_theme Qogir-Recolored-Dracula-Purple
 exec swaync
 #exec neofetch
 bindsym $mod+Shift+n exec swaync-client -t -sw
-for_window [class="kitty"] default_border pixel 1
+##for_window [class="kitty"] default_border pixel 1
 exec kitty
 exec polkit-dumb-agent
 bindsym $mod+s exec --no-startup-id flameshot gui

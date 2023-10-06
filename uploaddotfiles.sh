@@ -9,6 +9,7 @@ dotfiles=(
     "$HOME/.config/swaync/config.json"
     "$HOME/.config/swaync/style.css"
     "$HOME/.config/waybar/config"
+    "$HOME/.config/waybar/style.css"
     "$HOME/.config/kitty/kitty.conf"
     "$HOME/.config/ranger/rc.conf"
     "$HOME/.config/ranger/rifle.conf"
@@ -18,10 +19,12 @@ dotfiles=(
     "$HOME/.config/rofi/config.rasi"
     "$HOME/.config/neofetch/config.conf"
     "/usr/bin/neofetch"
-    "$HOME/.config/khal/config"
-    "$HOME/.config/vdirsyncer/config"
+    #"$HOME/.config/khal/config"
+    #"$HOME/.config/vdirsyncer/config"
+    "/bin/custom/floatingkitty.sh"
     "/bin/custom/steamgamename.sh"
     "/bin/custom/albumart.sh"
+    "$HOME/.config/gtk-3.0/settings.ini"
 )
 
 destination="$host/dotfiles/"
@@ -40,10 +43,13 @@ for file in "${dotfiles[@]}"; do
     sudo cp -r "$file" "$destination_with_subdirectory$filename"
 done
 
-sudo mkdir -p $HOME/import/dotfiles/alsa
-sudo cp $HOME/.asoundrc $HOME/import/dotfiles/alsa/
-sudo mkdir -p $HOME/import/dotfiles/bashrc
-sudo cp $HOME/.bashrc $HOME/import/dotfiles/bashrc/
+sudo mkdir -p $host/dotfiles/gtk2
+sudo cp $HOME/.gtkrc-2.0 $host/dotfiles/gtk2/
+
+sudo mkdir -p $host/dotfiles/alsa
+sudo cp $HOME/.asoundrc $host/dotfiles/alsa/
+sudo mkdir -p $host/dotfiles/bashrc
+sudo cp $HOME/.bashrc $host/dotfiles/bashrc/
 echo "stealing alsa, stealing bashrc"
 
 echo "process finish"

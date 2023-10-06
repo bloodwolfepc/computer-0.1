@@ -19,6 +19,33 @@ install-amd-dri() {
     fi
 }
 
+install-audio-dri() {
+    pacfile="$host/packages/audio-drivers"
+    if [ -f "$pacfile" ]; then
+        sudo pacman -S --needed --noconfirm - < "$pacfile"
+    else
+      echo "pac package file not found: $pacfile"
+    fi
+}
+
+install-emulator-packages() {
+    pacfile="$host/packages/emulators"
+    if [ -f "$pacfile" ]; then
+        sudo pacman -S --needed --noconfirm - < "$pacfile"
+    else
+      echo "pac package file not found: $pacfile"
+    fi
+}
+
+install-emulator-aur-packages() {
+    pacfile="$host/packages/emulators-aur"
+    if [ -f "$pacfile" ]; then
+        sudo pacman -S --needed --noconfirm - < "$pacfile"
+    else
+      echo "aur package file not found: $pacfile"
+    fi
+}
+
 install-aur-packages() {
     aurfile="$host/packages/aur"
     if [ -f "$aurfile" ]; then
@@ -26,6 +53,33 @@ install-aur-packages() {
     else
         echo "aur package file not found: $aurfile"
     fi 
+}
+
+install-fonts() {
+    pacfile="$host/packages/fonts"
+    if [ -f "$pacfile" ]; then
+        sudo pacman -S --needed --noconfirm - < "$pacfile"
+    else
+      echo "pac package file not found: $pacfile"
+    fi
+}
+
+install-fonts-aur() {
+    pacfile="$host/packages/fonts-aur"
+    if [ -f "$pacfile" ]; then
+        sudo pacman -S --needed --noconfirm - < "$pacfile"
+    else
+      echo "aur package file not found: $pacfile"
+    fi
+}
+
+install-virtualization-packages() {
+    pacfile="$host/packages/virtualization"
+    if [ -f "$pacfile" ]; then
+        sudo pacman -S --needed --noconfirm - < "$pacfile"
+    else
+      echo "pac package file not found: $pacfile"
+    fi
 }
 
 install-yay() {
