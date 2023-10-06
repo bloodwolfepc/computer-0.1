@@ -22,7 +22,7 @@ migrate-dot-files() {
     cp $dotfiles/rofi/config.rasi $HOME/.config/rofi/config.rasi
     mkdir -p $HOME/.config/neofetch
     cp $dotfiles/neofetch/config.conf $HOME/.config/neofetch/config.conf
-    cp $dotfiles/gtk2/gtk2rc $HOME/.gtk2rc
+    cp $dotfiles/gtk2/.gtk2rc $HOME/.gtk2rc
     sudo cp $dotfiles/bin/neofetch /usr/bin/neofetch
     sudo mkdir -p /bin/custom
     sudo cp -r $dotfiles/custom/* /bin/custom/
