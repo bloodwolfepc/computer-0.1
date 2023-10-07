@@ -6,7 +6,7 @@ sudo -v
 
 
 
-install-aurdio-dri
+install-audio-dri
 #install-msi-dir
 install-pacman-packages
 install-yay
