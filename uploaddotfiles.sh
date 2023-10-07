@@ -21,9 +21,9 @@ dotfiles=(
     "/usr/bin/neofetch"
     #"$HOME/.config/khal/config"
     #"$HOME/.config/vdirsyncer/config"
-    "/bin/custom/floatingkitty.sh"
-    "/bin/custom/steamgamename.sh"
-    "/bin/custom/albumart.sh"
+    #"/bin/custom/floatingkitty.sh"
+    #"/bin/custom/steamgamename.sh"
+    #"/bin/custom/albumart.sh"
     "$HOME/.config/gtk-3.0/settings.ini"
 )
 
@@ -43,6 +43,8 @@ for file in "${dotfiles[@]}"; do
     sudo cp -r "$file" "$destination_with_subdirectory$filename"
 done
 
+sudo mkdir -p $host/dotfiles/custom
+sudo cp -r /bin/custom/* $host/dotfiles/custom/
 sudo mkdir -p $host/dotfiles/gtk2
 sudo cp $HOME/.gtkrc-2.0 $host/dotfiles/gtk2/
 
