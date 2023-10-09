@@ -3,7 +3,6 @@
 #
 
 export VISUAL=nvim
-export RANGER_LOAD_DEFAULT_DIR="/home/bloodwolfe/Downloads"
 #nk If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 export XDG_CURRENT_DESKTOP=sway
@@ -43,6 +42,9 @@ alsaconf() {
 #sway commands
 swayconf() {
 	sudo nvim ~/.config/sway/config
+}
+monitorconf() {
+	sudo nvim ~/.config/sway/monitor-config
 }
 sncconf() {
 	nvim ~/.config/swaync/config.json

@@ -25,6 +25,6 @@ allocate-assets
 sudo -k
 
 echo "configure monitor before launching sway 'monitorconf'"
-source /.bashrc
+source $HOME/.bashrc
 source /bin/custom/cloud.sh
 
