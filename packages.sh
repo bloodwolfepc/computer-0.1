@@ -4,9 +4,16 @@ host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 install-pacman-packages() {
     pacfile="$host/packages/pacman"
     if [ -f "$pacfile" ]; then
-        sudo pacman -S --needed --noconfirm - < "$pacfile"
+        # Use a while loop to read packages line by line
+        while IFS= read -r package; do
+            # Check if the package is not empty
+            if [ -n "$package" ]; then
+                # Try to install the package, and if it fails, log an error but continue with the next package
+                sudo pacman -S --needed --noconfirm "$package" || echo "Error installing package: $package"
+            fi
+        done < "$pacfile"
     else
-      echo "pac package file not found: $pacfile"
+        echo "pac package file not found: $pacfile"
     fi
 }
 
