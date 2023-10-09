@@ -84,6 +84,7 @@ install-virtualization-packages() {
 }
 
 install-discord-screenaudio() {
+    cd $HOME
     git clone https://github.com/maltejur/discord-screenaudio.git
     cd discord-screenaudio
     cmake -B build
