@@ -83,10 +83,30 @@ install-virtualization-packages() {
     fi
 }
 
+install-discord-screenaudio() {
+    git clone https://github.com/maltejur/discord-screenaudio.git
+    cd discord-screenaudio
+    cmake -B build
+    cmake --build build --config Release
+    cd ..
+}
+
 install-yay() {
     git clone https://aur.archlinux.org/yay.git
     cd yay
     makepkg -si --noconfirm
     cd ..
     rm -rf yay
+}
+
+services-and-directories() {
+sudo systemctl start sshd.service
+sudo systemctl enable sshd.service
+#remember ssh commands ssh-keygen and ssh-copy-id
+mkdir $HOME/.custom
+mkdir $HOME/.custom/sshhost
+mkdir $HOME/.cloud
+
+mkdir $HOME/.config/sway/monitor-config
+echo "#swaymsg -t get_outputs" > $HOME/.config/sway/monitor-config
 }

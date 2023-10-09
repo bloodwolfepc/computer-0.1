@@ -1,10 +1,12 @@
 pipewire 200 and 1000 profiles
-sway separate monitor config
+#sway separate monitor config
 finish writing asset distribution
-setup discord-screenaudio
+#setup discord-screenaudio
 install orca-c
 chagne to bottles flatpack
-use mega for emulator specific packages
+emulator specifics
+
+cleanup everything
 
 ableton and wineasio
 theme hotswaps

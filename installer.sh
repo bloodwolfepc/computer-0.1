@@ -7,17 +7,23 @@ sudo -v
 
 
 install-audio-dri
-#install-msi-dir
+#install-msi-dri
 install-pacman-packages
 install-yay
 install-aur-packages
 #install-emulator-packages
-#install-emulators-aur-packages
+#install-emulator-aur-packages
 install-fonts
 install-fonts-aur
 #install-virtualization-packages
+install-discord-screenaudio
 
 migrate-dot-files
-
+services-and-directories
 
 sudo -k
+
+echo "configure monitor before launching sway 'monitorconf'"
+source /.bashrc
+source /bin/custom/cloud.sh
+
