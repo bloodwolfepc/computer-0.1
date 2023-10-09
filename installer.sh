@@ -19,12 +19,12 @@ install-fonts-aur
 install-discord-screenaudio
 
 migrate-dot-files
-services-and-directories
 allocate-assets
+enable-services
 
 sudo -k
 
 echo "configure monitor before launching sway 'monitorconf'"
 source $HOME/.bashrc
 source /bin/custom/cloud.sh
-
+neofetch

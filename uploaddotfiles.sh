@@ -6,6 +6,8 @@ dotfiles=(
     "$HOME/.config/nvim/init.lua"
     "/etc/pipewire"
     "$HOME/.config/sway/config"
+    "$HOME/.config/sway/monitor-config"
+    "$HOME/.config/sway/style-config"
     "$HOME/.config/swaync/config.json"
     "$HOME/.config/swaync/style.css"
     "$HOME/.config/waybar/config"
@@ -45,6 +47,10 @@ done
 
 sudo mkdir -p $host/dotfiles/custom
 sudo cp -r /bin/custom/* $host/dotfiles/custom/
+
+sudo mkdir -p $host/dotfiles/home
+sudo cp -r $HOME/.custom/* $host/dotfiles/home/.custom/
+
 sudo mkdir -p $host/dotfiles/gtk2
 sudo cp $HOME/.gtkrc-2.0 $host/dotfiles/gtk2/
 

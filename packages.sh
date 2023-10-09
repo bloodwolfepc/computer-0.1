@@ -99,22 +99,5 @@ install-yay() {
     rm -rf yay
 }
 
-services-and-directories() {
-sudo systemctl start sshd.service
-sudo systemctl enable sshd.service
-#remember ssh commands ssh-keygen and ssh-copy-id
-mkdir $HOME/.custom
-mkdir $HOME/.custom/sshhost
-mkdir $HOME/.cloud
 
-echo "#swaymsg -t get_outputs" > $HOME/.config/sway/monitor-config
-mkdir $HOME/.config/sway/style
-}
 
-allocate-assets() {
-mkdir -$HOME/.wallpapers
-cp -r $host/assets/wallpapers $HOME/.wallpapers
-
-mkdir $HOME/.icons
-cp -r $host/assets/cursors $HOME/.icons
-}
