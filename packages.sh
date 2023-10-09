@@ -109,4 +109,14 @@ mkdir $HOME/.cloud
 
 mkdir $HOME/.config/sway/monitor-config
 echo "#swaymsg -t get_outputs" > $HOME/.config/sway/monitor-config
+
+mkdir $HOME/.config/sway/style
+}
+
+allocate-assets() {
+mkdir -$HOME/.wallpapers
+cp $host/assets/wallpapers $HOME/.wallpapers
+
+mkdir $HOME/.icons
+cp $host/assets/cursors $HOME/.icons
 }

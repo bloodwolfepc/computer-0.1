@@ -20,6 +20,7 @@ install-discord-screenaudio
 
 migrate-dot-files
 services-and-directories
+allocate-assets
 
 sudo -k
 
