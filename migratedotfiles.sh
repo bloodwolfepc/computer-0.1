@@ -32,11 +32,11 @@ migrate-dot-files() {
 }
 
 allocate-assets() {
-mkdir -p -$HOME/.wallpapers
-cp -r $host/assets/wallpapers/* $HOME/.wallpapers/
+suod mkdir -p $HOME/.wallpapers
+sudo cp -r $host/assets/wallpapers/* $HOME/.wallpapers/
 
-#mkdir -p $HOME/.icons
-cp -r $host/assets/cursors/* /usr/share/icons/
+sudo mkdir -p $HOME/.icons
+sudo cp -r $host/assets/cursors/* /usr/share/icons/
     echo "assets allocated"
 }
 

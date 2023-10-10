@@ -47,3 +47,4 @@ ffmpeg
 flatpak
 flatpak-builder
 cups
+cmake

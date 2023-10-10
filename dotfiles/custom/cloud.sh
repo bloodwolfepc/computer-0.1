@@ -1,5 +1,5 @@
 cloud="$HOME/.cloud"
-sshhost_file="$HOME/.custom/sshhost"
+sshhost_file="$HOME/.hostip"
 
 cloudsync() {
 
