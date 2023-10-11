@@ -1,6 +1,6 @@
 wttrbar-git
+wttr
 dotnet-runtime-bin
-neovim-git
 browsh
 mangohud
 lib32-mangohud
@@ -16,7 +16,6 @@ showmethekeys
 flameshot-git
 visual-studio-code-bin
 protonup-qt
-ranger-git
 bottles
 looking-glass
 gcalcli
@@ -26,4 +25,4 @@ grapejuice-git
 tidal-hifi-bin
 mpvpaper
 sway-nc
-wttrbar
+lib32-gperftools

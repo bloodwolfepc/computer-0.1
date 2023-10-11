@@ -7,20 +7,21 @@ sudo -v
 
 
 install-audio-dri
-#install-msi-dri
+install-msi-dri
 install-pacman-packages
 install-yay
 install-aur-packages
-#install-emulator-packages
-#install-emulator-aur-packages
+install-emulator-packages
+install-emulator-aur-packages
 install-fonts
 install-fonts-aur
-#install-virtualization-packages
+install-virtualization-packages
 install-discord-screenaudio
 
 migrate-dot-files
 allocate-assets
 enable-services
+laptop-specifics
 
 sudo -k
 

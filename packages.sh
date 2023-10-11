@@ -55,11 +55,12 @@ install-emulator-aur-packages() {
 }
 
 install-aur-packages() {
-    aurfile="$host/packages/aur"
-    if [ -f "$aurfile" ]; then
-        yay -S --needed -noconfirm - < "$aurfile"
+    pacfile="$host/packages/aur"
+    cat $pacfile
+    if [ -f "$pacfile" ]; then
+        yay -S --needed --noconfirm - < "$pacfile"
     else
-        echo "aur package file not found: $aurfile"
+        echo "aur package file not found: $pacfile"
     fi 
 }
 

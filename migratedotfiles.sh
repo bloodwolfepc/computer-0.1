@@ -48,3 +48,10 @@ sudo systemctl enable sshd.service
 #remember ssh commands ssh-keygen and ssh-copy-id
     "services enabled"
 }
+
+laptop-specifics() {
+git clone https://github.com/AdnanHodzic/auto-cpufreq.git
+cd auto-cpufreq && sudo ./auto-cpufreq-installer
+sudo auto-cpufreq --install
+cd ..
+}

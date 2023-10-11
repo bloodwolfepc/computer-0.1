@@ -48,3 +48,7 @@ flatpak
 flatpak-builder
 cups
 cmake
+qt5-webengine
+gnu-getcat
+gamescope
+acpi
