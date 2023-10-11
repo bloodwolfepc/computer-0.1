@@ -7,7 +7,7 @@ migrate-dot-files() {
     cp $dotfiles/nvim/init.lua $HOME/.config/nvim/init.lua
     #cp -r $dotfiles/etc/pipewire /etc/pipewire
     mkdir -p $HOME/.config/sway
-    cp $dotfiles/sway/* $HOME/.config/sway/*
+    cp $dotfiles/sway/* $HOME/.config/sway/
     mkdir -p $HOME/.config/swaync
     cp $dotfiles/swaync/config.json $HOME/.config/swaync/config.json
     cp $dotfiles/swaync/style.css $HOME/.config/swaync/style.css
@@ -22,7 +22,9 @@ migrate-dot-files() {
     cp $dotfiles/rofi/config.rasi $HOME/.config/rofi/config.rasi
     mkdir -p $HOME/.config/neofetch
     cp $dotfiles/neofetch/config.conf $HOME/.config/neofetch/config.conf
-    cp $dotfiles/gtk2/.gtk2rc-2.0 $HOME/.gtk2rc-2.0
+    mkdir -p $HOME/.config/gtk-3.0
+    cp $dotfiles/gtk-3.0/settings.ini $HOME/.config/gtk-3.0/settings.ini
+    sudo cp $dotfiles/gtk2/.gtk2rc-2.0 $HOME/.gtkrc-2.0
     sudo cp $dotfiles/bin/neofetch /usr/bin/neofetch
     sudo mkdir -p /bin/custom
     sudo cp -r $dotfiles/custom/* /bin/custom/
@@ -32,7 +34,7 @@ migrate-dot-files() {
 }
 
 allocate-assets() {
-suod mkdir -p $HOME/.wallpapers
+sudo mkdir -p $HOME/.wallpapers
 sudo cp -r $host/assets/wallpapers/* $HOME/.wallpapers/
 
 sudo mkdir -p $HOME/.icons

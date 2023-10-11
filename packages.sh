@@ -28,6 +28,7 @@ install-amd-dri() {
 
 install-audio-dri() {
     sudo pacman -R pipewire-media-session --noconfirm
+    sudo pacman -R puleausio --noconfirm
     pacfile="$host/packages/audio-drivers"
     if [ -f "$pacfile" ]; then
         sudo pacman -S --needed --noconfirm - < "$pacfile"
