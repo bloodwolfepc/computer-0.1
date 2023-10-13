@@ -156,7 +156,11 @@ configuration {
 configuration {
   modes: [ combi ];
   combi-modes: [ window, drun, run ];
-  font: "Monaco 10";
+  font: "Monaco 9.3";
+  display-drun: "---";
+  show-icons: true;
+  drun-display-format: "{name}";
+  sidebar-mode: false;
 
 }
 
@@ -164,14 +168,74 @@ configuration {
  
 /* Insert theme modifications after this */
 
-
+* {
+	background: #8532a860;
+	forground: #8532a800;
+	text: #ffffff;
+	border: #000000;
+}
 entry {
-    placeholder: "uwu";
+    placeholder: "   uwu";
+    background-color: @background;
+    blink: true;
+    expand: true;
+    text-color: @text; 
+
    }
 
 window {
- width: 20%;
+ width: 15%;
  Format: north;
+ location: northwest;
+ anchor: northwest;
+ x-offset: 20px;
+ y-offset: 50px;
+ transparency: "real";
+
+ border-radius: 0px;
+ border: 0px;
+ enabled: true;
+
+
+
+
+ background-color: transparent;
 }
 
+mainbox{
+	enabled: true;
+	border: 0.2% 0.1% 0.2% 0.1%;
+	border-radious: 0% 0% 0% 0%;
+	border-color: @border;
 
+
+
+	background-color: @background;
+	children: [ "inputbar", "listview" ];
+	}
+inputbar {
+	children: [ prompt, entry ];
+	background-color: @background;
+}
+prompt {
+	enabled: true;
+	text-color: @text;
+}
+listview {
+	background-color: @background;
+	dynamic: true;
+	}
+
+element {
+	enabled: true;
+	background-color: @background;
+}
+element-icon {
+	background-color: @background;
+	}
+element-text {
+background-color: @background;
+}
+message {
+	background-color: @background;
+	}

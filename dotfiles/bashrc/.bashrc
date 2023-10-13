@@ -1,6 +1,7 @@
 #
 # ~/.bashrc
-#
+
+#include /bin/custom/cloud.sh
 
 export VISUAL=nvim
 #nk If not running interactively, don't do anything
@@ -11,6 +12,7 @@ alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 
 alias nv='nvim'
+alias snv='sudo nvim'
 
 alias frvol='pactl set-sink-volume "$(pactl list sinks | grep "Scarlett 4i4 USB Analog Surround 4.0" -B 3 | awk '\''/Name/ {print $NF}'\'')"'
 
@@ -125,6 +127,14 @@ khalconf() {
 }
 vdirsyncconf() {
 	sudo nvim ~/.config/vdirsyncer/config
+}
+
+
+sinks() {
+	pactl list sinks | awk '/Sink #|Name:/'
+}
+setsink() {
+	pactl set-default-sink $1
 }
 
 #reminder of ~/.config/waybar/custom/tidal/albumart.sh

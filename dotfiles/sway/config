@@ -1,52 +1,38 @@
+include "monitor-config"
+include "style-config"
 exec systemctl --user import-envionment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec dbus-update-activation-envionment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
-#autostart programs
-#exec_always steam
-exec steam
-exec /home/bloodwolfe/discord-screenaudio/build/discord-screenaudio
-exec_always /bin/custom/steamgamename.sh
-
-#no mouse acc
-input * accel_profile flat
-
-#execs
-exec ydotoold
-
-### Variables
-#
-# Logo key. Use Mod1 for Alt.
+# Variables
 set $mod Mod4
-# Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
+
 set $term kitty
+
+#autostart progs
+exec steam
+exec /home/bloodwolfe/discord-screenaudio/build/discord-screenaudio
+#exec_always /bin/custom/steamgamename.sh #works pretty badly tbh
+
+exec ydottoold
+exec swaync
+bindsym $mod+Shift+n exec swaync-client -t -sw
+exec kitty
+exec polkit-dumb-agent
+bindsym $mod+s exec --no-startup-id flameshot gui
+bindsym $mod+shift+s exec --no-startup-id flameshot full -c -p ~/Pictures
+
+#no mouse acc
+input * accel_profile flat
+
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu rofi -show drun
 bindsym $mod+shift+semicolon rofi -show drun
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# I COMMENTED THIS OUT output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg /home/bloodwolfe/.wallpapers/3840x2160-black-solid-color-background.jpg fill
-
-#floating kitten
-
-bindsym $mod+m [title="floatingkitty"] scratchpad show
-for_window [title="floatingkitty"] border pixel 1 
-for_window [title="floatingkitty"] border_colors #ffffff
-
-#bindsym $mod+n [con_mark="kitty"] scratchpad show
-#exec_always kitty --name="hidden-floating-kitty" --hidden --keep-focus
-#bindsym $mod+n [instance="hidden-floating-kitty"] focus
-#for_window [instance="hidden-floating-kitty"] floating enable, focus, fullscreen
-
-
 
 #showmethekey support
 for_window [app_id="one.alynx.showmethekey" title="Floating Window - Show Me The Key"] {
@@ -55,21 +41,10 @@ for_window [app_id="one.alynx.showmethekey" title="Floating Window - Show Me The
 }
 
 #keyboard bindsyms
-bindsym $mod+q exec ~/launchoptions.sh
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-
-include "monitor-config"
-include "style-config"
-##output DP-1 {
-##resolution 1920x1080@144Hz
-##adaptive_sync on (kind of broken rn)
-##}
+#bindsym $mod+q exec ~/launchoptions.sh
 
 
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+
 
 ### Idle configuration
 #
@@ -84,7 +59,11 @@ include "style-config"
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
+
+
+
 ### Input configuration
+#swaymsg -t get_inputs
 #
 # Example configuration:
 #
@@ -94,9 +73,11 @@ include "style-config"
 #       natural_scroll enabled
 #       middle_emulation enabled
 #   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+input type:touchpad {
+	dwt disabled
+	accel_profile "flat"
+	pointer_accel 0.5
+}
 
 ### Key bindings
 #
@@ -210,9 +191,9 @@ for_window [title="discord-screenaudio"] move container to workspace 6
     bindsym $mod+g fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+f+space floating toggle
+    bindsym $mod+shift+space floating toggle
 
-    # Swap focus between the tiling area and the floating area
+    # Swap focue between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
 
     # Move focus to the parent container
@@ -224,11 +205,11 @@ for_window [title="discord-screenaudio"] move container to workspace 6
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+f+n move scratchpad
+    bindsym $mod+shift+period move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+n scratchpad show
+    bindsym $mod+period scratchpad show
 #
 # Resizing containers:
 #
@@ -254,48 +235,10 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#
 # Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
 bar {
 	swaybar_command waybar
 }
-#the following is commented out to be replaced with waybar
- #   position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-  #  status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-
-   # colors {
-    #    statusline #ffffff
-     #   background #323232
-      #  inactive_workspace #32323200 #32323200 #5c5c5c
-   # }
 
 include /etc/sway/config.d/*
 
-##personal customizatins
-
-default_border none
-default_floating_border pixel 1
-gaps inner 5
-gaps outer 5
-client.focused #ffffff #000000 #ffffff #000000 #ffffff
-
-##default_border none
-##hide_edge_borders both
-
-#bindsym $mod+semicolon  exec bemenu-run -p "Run:" -l 20 --binding vim
-seat seat0 xcursor_theme Qogir-Recolored-Dracula-Purple
-exec swaync
-#exec neofetch
-bindsym $mod+Shift+n exec swaync-client -t -sw
-##for_window [class="kitty"] default_border pixel 1
-exec kitty
-exec polkit-dumb-agent
-bindsym $mod+s exec --no-startup-id flameshot gui
-##bindsym $mod+m exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e bash -ic "{cmd} && read"'
-#exec --no-startup-id /home/bloodwolfe/tempvrr.sh
-##exec --no-startup-id /home/bloodwolfe/buffer.sh
