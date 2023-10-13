@@ -18,11 +18,12 @@ install-pacman-packages() {
 }
 
 install-amd-dri() {
-    amdfile="$host/packages/amd-drivers"
-    if [ -f "$amdfile"]; then
-        sudo pacman -S --needed --noconfirm - < "$amdfile"
+    pacfile="$host/packages/amd-drivers"
+    cat $pacfile
+    if [ -f "$pacfile" ]; then
+        sudo pacman -S --needed --noconfirm - < "$pacfile"
     else
-        echo "amd package file not found: $amdfile"
+        echo "amd package file not found: $pacfile"
     fi
 }
 

@@ -47,6 +47,9 @@ sudo -k
 enable-services() {
 sudo systemctl start sshd.service
 sudo systemctl enable sshd.service
+
+sudo systemctl start bluetooth.service
+sudo systemctl enable bluetooth.service
 #remember ssh commands ssh-keygen and ssh-copy-id
     "services enabled"
 }

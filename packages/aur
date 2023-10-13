@@ -26,3 +26,5 @@ tidal-hifi-bin
 mpvpaper
 swaync
 lib32-gperftools
+bluez-git
+vrrtest-git
