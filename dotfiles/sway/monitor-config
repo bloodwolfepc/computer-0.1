@@ -8,7 +8,10 @@
 #pactl set-default-sink <sink_name>
 #pactl set-default-sink 64
 
-
+output DP-1 {
+	resolution 1920x1080@144Hz
+	scale 1
+	}
 output eDP-2 {
 	scale 1.6
 	resolution 2560x1600@120Hz

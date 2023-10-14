@@ -11,7 +11,37 @@ cloudsync() {
     	echo "Error: SSH host file ($sshhost_file) not found!"
     		exit 1
 	fi
+
+	#switchbios here
 	rsync -rv "$sshhost:$cloud/" "$cloud/"
+	rsync -rv "$sshhost:$HOME/notebook/" "$HOME/notebook/"
+
+	#emulator bios
+	rsync -rv "$sshhost:$HOME/.config/PCSX2/bios/" "$HOME/.config/PCSX2/bios/"
+	rsync -rv "$sshhost:$HOME/.local/share/duckstation/bios/" "$HOME/.config/PCSX2/bios/"
+	
+	#emulator saves mostly from ~/.local/share
+	rsync -rv "$sshhost:SHOME/.local/share/duckstation/" "$HOME/.local/share/duckstation/"
+
+	rsync -rv "$sshhost:$HOME/.local/share/duckstation/" "$HOME/.local/share/duckstation"
+
+	#mgba places saves with the rom im not dealing with it right now
+	
+	mkdir -p "$HOME/.local/share/mupen64plus"
+	rsync -rv "$sshhost:$HOME/.local/share/mupen64plus" "$HOME/.local/share/mupen64plus"
+
+	mkdir -p "$HOME/.snes9x"
+	rysn -rv "$sshhost:$HOME/.snes9x/" "$HOME/.snes9x/"
+
+
+
+
+
+
+	rsync -rv "$sshhost:HOST/.config/desmume/" "$HOST/.config/desmume/"
+
+
+
 
 }
 

@@ -136,6 +136,9 @@ sinks() {
 setsink() {
 	pactl set-default-sink $1
 }
+speakertest() {
+	speaker-test -c 2 -t wav -l 1
+}
 
 #reminder of ~/.config/waybar/custom/tidal/albumart.sh
 
