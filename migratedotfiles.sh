@@ -7,7 +7,7 @@ migrate-dot-files() {
     cp $dotfiles/nvim/init.lua $HOME/.config/nvim/init.lua
     #cp -r $dotfiles/etc/pipewire /etc/pipewire
     mkdir -p $HOME/.config/sway
-    cp $dotfiles/sway/* $HOME/.config/sway/
+    sudo cp $dotfiles/sway/* $HOME/.config/sway/
     mkdir -p $HOME/.config/swaync
     cp $dotfiles/swaync/config.json $HOME/.config/swaync/config.json
     cp $dotfiles/swaync/style.css $HOME/.config/swaync/style.css
