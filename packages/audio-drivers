@@ -1,0 +1,12 @@
+pipewire
+lib32-pipewire
+pipewire-docs
+wireplumber
+qpwgraph
+pipewire-alsa
+pipewire-jack
+pipewire-zeroconf
+lib32-alsa-lib
+lib32-alsa-plugins
+alsa-utils
+lib32-pipewire-jack
