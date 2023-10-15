@@ -1,7 +1,6 @@
 #
 # ~/.bashrc
 
-source /bin/custom/cloud.sh
 source /bin/custom/pipewire.sh
 export VISUAL=nvim
 #nk If not running interactively, don't do anything

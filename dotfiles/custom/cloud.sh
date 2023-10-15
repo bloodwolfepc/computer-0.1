@@ -22,7 +22,9 @@ cloudsync() {
         "$HOME/.local/share/mupen64plus/"
         "$HOME/.snes9x"
         "$HOME/.config/desmume/"
-	"$HOME/.config/Ryujinx/bis/user/save/"
+        "$HOME/.config/Ryujinx/bis/user/save/"
+        "$HOME/.var/app/com.usebottles.bottles/data/botles/bottles/ableton/drive_c/users/bloodwolfe/Documents/Ableton/"
+        "$HOME/.var/app/com.usebottles.bottles/data/bottles/bottes/ableton/drive_c/users/bloodwolfe/Desktop"
         # Add more directories as needed
     )
 
@@ -34,40 +36,13 @@ cloudsync() {
         # Ensure directory exists on remote machine
         ssh "$sshhost" "mkdir -p $dir"
 
-        # Sync data between local and remote machines
-        rsync -rv "$dir" "$sshhost:$dir"
-        rsync -rv "$sshhost:$dir" "$dir"
+        # Sync data from local to remote
+        rsync -av --delete-after "$dir/" "$sshhost:$dir/"
+
+        # Sync data from remote to local
+        rsync -av --delete-after "$sshhost:$dir/" "$dir/"
     done
 
     sudo -k
 }
 
-
-
-
-emulator-bios-push() {
-echo "nothing"
-}
-
-emulator-bios-pull() {
-	sudo cp -r $cloud/bios/ps1/* $HOME/.local/share/duckstation/bios/
-	sudo cp -r $cloud/cloud/bios/ps2/* $HOME/
-	sudo cp -r $cloud/bios/switch/F16.1/*
-	sudo cp -r $cloud/bios/switch/keys/*
-
-}
-
-emulator-saves-push() {
-	sudo cp $HOME/.local/share/duckstation/savestates $cloud/ps1/savestates
-	sudo cp $HOME/.local/share/duckstation/memcards $cloud/ps1/memcards
-
-	sudo cp -r $HOME/.local/share/mupen64plus/save $cloud/n64/save
-}
-
-
-emulator-saves-pull() {
-	sudo cp $cloud/ps1/savestates $HOME/.local/share/duckstation/savestates
-	sudo cp $cloud/ps1/memcards $HOME/.local/share/duckstation/memcards
-	
-	sudo cp -r $cloud/n64/save $HOME/.local/share/mupen64plus/save
-}
