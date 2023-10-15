@@ -55,3 +55,5 @@ acpi
 swaybg
 wl-mirror
 hid-tools
+rsync
+syncthing

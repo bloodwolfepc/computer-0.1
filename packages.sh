@@ -110,5 +110,19 @@ install-yay() {
     rm -rf yay
 }
 
+install-bottles() {
+	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+	flatpak install bottles
+}
+install-ableton() {
+        #when I first tried it it would start in offline mode and the following command would be broken, somply starting the gui once here is a valid workaround
+	flatpak run --command=bottles-cli com.usebottles.bottles new --bottle-name ableton --environment application
+        #as of now the bottles cli is too buggy maybe try this command again some other time#I coulld move the installer to an unhidden location to make this work, I think 
+}
+
+
+
+
+
 
 

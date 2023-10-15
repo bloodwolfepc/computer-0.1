@@ -29,6 +29,8 @@ migrate-dot-files() {
     sudo mkdir -p /bin/custom
     sudo cp -r $dotfiles/custom/* /bin/custom/
     sudo cp $dotfiles/bashrc/.bashrc $HOME/.bashrc
+    mkdir $HOME/.custom/pipewire
+    sudo cp -r $dotfiles/pipewire/* $HOME/.custom/pipewire/
 
     echo "dotfiles migrated"
 }
@@ -40,6 +42,7 @@ sudo cp -r $host/assets/wallpapers/* $HOME/.wallpapers/
 sudo mkdir -p $HOME/.icons
 sudo cp -r $host/assets/cursors/* /usr/share/icons/
     echo "assets allocated"
+
 }
 
 sudo -k
@@ -50,6 +53,9 @@ sudo systemctl enable sshd.service
 
 sudo systemctl start bluetooth.service
 sudo systemctl enable bluetooth.service
+
+systemctl --user enable --now syncthing.service
+systemctl --user start --now syncthing.service
 #remember ssh commands ssh-keygen and ssh-copy-id
     "services enabled"
 }

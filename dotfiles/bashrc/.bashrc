@@ -1,8 +1,8 @@
 #
 # ~/.bashrc
 
-#include /bin/custom/cloud.sh
-
+source /bin/custom/cloud.sh
+source /bin/custom/pipewire.sh
 export VISUAL=nvim
 #nk If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -16,6 +16,21 @@ alias snv='sudo nvim'
 
 alias frvol='pactl set-sink-volume "$(pactl list sinks | grep "Scarlett 4i4 USB Analog Surround 4.0" -B 3 | awk '\''/Name/ {print $NF}'\'')"'
 
+gitpush() {
+	git add .
+	git commit -m "commit"
+	git push
+}
+gitpull() {
+	git stash
+	git fetch origin master
+	git pull
+}
+qssh() {
+	sshhost_file="$HOME/.hostip"
+	sshhost=$(cat "$sshhost_file")
+	ssh $sshhost
+}
 
 nvconf() {
 	nvim ~/.config/nvim/init.lua

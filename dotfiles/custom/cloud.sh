@@ -2,48 +2,47 @@ cloud="$HOME/.cloud"
 sshhost_file="$HOME/.hostip"
 
 cloudsync() {
+    sudo -v
 
-	sshhost_file="$HOME/.custom/sshhost"
+    if [ -f "$sshhost_file" ]; then
+        sshhost=$(cat "$sshhost_file")
+    else
+        echo "Error: SSH host file ($sshhost_file) not found!"
+        exit 1
+    fi
 
-	if [ -f "$sshhost_file" ]; then
-     		sshhost=$(cat "$sshhost_file")
-	else
-    	echo "Error: SSH host file ($sshhost_file) not found!"
-    		exit 1
-	fi
+    # Define directories to sync
+    sync_directories=(
+        "$HOME/.config/Ryujinx/system/"
+        "$cloud"
+        "$HOME/notebook"
+        "$HOME/.config/PCSX2/bios"
+        "$HOME/.local/share/duckstation/bios"
+        "$HOME/.local/share/duckstation/"
+        "$HOME/.local/share/mupen64plus/"
+        "$HOME/.snes9x"
+        "$HOME/.config/desmume/"
+	"$HOME/.config/Ryujinx/bis/user/save/"
+        # Add more directories as needed
+    )
 
-	#switchbios here
-	rsync -rv "$sshhost:$cloud/" "$cloud/"
-	rsync -rv "$sshhost:$HOME/notebook/" "$HOME/notebook/"
+    # Loop through directories
+    for dir in "${sync_directories[@]}"; do
+        # Ensure directory exists on local machine
+        mkdir -p "$dir"
 
-	#emulator bios
-	rsync -rv "$sshhost:$HOME/.config/PCSX2/bios/" "$HOME/.config/PCSX2/bios/"
-	rsync -rv "$sshhost:$HOME/.local/share/duckstation/bios/" "$HOME/.config/PCSX2/bios/"
-	
-	#emulator saves mostly from ~/.local/share
-	rsync -rv "$sshhost:SHOME/.local/share/duckstation/" "$HOME/.local/share/duckstation/"
+        # Ensure directory exists on remote machine
+        ssh "$sshhost" "mkdir -p $dir"
 
-	rsync -rv "$sshhost:$HOME/.local/share/duckstation/" "$HOME/.local/share/duckstation"
+        # Sync data between local and remote machines
+        rsync -rv "$dir" "$sshhost:$dir"
+        rsync -rv "$sshhost:$dir" "$dir"
+    done
 
-	#mgba places saves with the rom im not dealing with it right now
-	
-	mkdir -p "$HOME/.local/share/mupen64plus"
-	rsync -rv "$sshhost:$HOME/.local/share/mupen64plus" "$HOME/.local/share/mupen64plus"
-
-	mkdir -p "$HOME/.snes9x"
-	rysn -rv "$sshhost:$HOME/.snes9x/" "$HOME/.snes9x/"
-
-
-
-
-
-
-	rsync -rv "$sshhost:HOST/.config/desmume/" "$HOST/.config/desmume/"
-
-
-
-
+    sudo -k
 }
+
+
 
 
 emulator-bios-push() {
