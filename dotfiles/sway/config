@@ -11,6 +11,8 @@ set $up k
 set $right l
 
 set $term kitty
+bindsym $mod+n exec kitty --directory ~/notebook
+#bindsym $mod+b exec kitty -e bluetoothctl
 
 #autostart progs
 exec steam
@@ -20,7 +22,7 @@ exec /home/bloodwolfe/discord-screenaudio/build/discord-screenaudio
 exec ydottoold
 exec swaync
 bindsym $mod+Shift+n exec swaync-client -t -sw
-exec kitty
+exec kitty --hold neofetch
 exec polkit-dumb-agent
 bindsym $mod+s exec --no-startup-id flameshot gui
 bindsym $mod+shift+s exec --no-startup-id flameshot full -c -p ~/Pictures

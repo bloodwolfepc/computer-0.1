@@ -27,9 +27,13 @@ migrate-dot-files() {
     sudo cp $dotfiles/bin/neofetch /usr/bin/neofetch
     sudo mkdir -p /bin/custom
     sudo cp -r $dotfiles/custom/* /bin/custom/
-    sudo cp $dotfiles/bashrc/.bashrc $HOME/.bashrc
     mkdir $HOME/.custom/pipewire
-    sudo cp -r $dotfiles/pipewire/* $HOME/.custom/pipewire/
+    #sudo cp -r $dotfiles/pipewire/* $HOME/.custom/pipewire/
+    #
+    sudo cp -r $dotfiles/zsh/* $HOME/
+
+    
+    
 
     echo "dotfiles migrated"
 }
@@ -62,9 +66,15 @@ sudo chmod -R u+rwX $HOME
 sudo chown -R $USER:$USER $HOME
 }
 
-laptop-specifics() {
+install-laptop-specifics() {
 git clone https://github.com/AdnanHodzic/auto-cpufreq.git
 cd auto-cpufreq && sudo ./auto-cpufreq-installer
 sudo auto-cpufreq --install
 cd ..
+}
+
+use-zsh() {
+chsh -l 
+chsh -s /bin/zsh
+sudo mkdir ~/.sshplug
 }

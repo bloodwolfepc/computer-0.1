@@ -57,8 +57,15 @@ sudo cp $HOME/.gtkrc-2.0 $host/dotfiles/gtk2/
 
 sudo mkdir -p $host/dotfiles/alsa
 sudo cp $HOME/.asoundrc $host/dotfiles/alsa/
-sudo mkdir -p $host/dotfiles/bashrc
-sudo cp $HOME/.bashrc $host/dotfiles/bashrc/
+
+
+sudo mkdir -p $host/dotfiles/zsh
+sudo cp $HOME/.zshrc $host/dotfiles/zsh/
+sudo cp $HOME/.zprofile $host/dotfiles/zsh/
+suco cp $HOME/.zshenv $host/dotfiles/zsh/
+
+
+
 echo "stealing alsa, stealing bashrc"
 
 echo "process finish"
