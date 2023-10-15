@@ -109,15 +109,20 @@ install-yay() {
     cd ..
     rm -rf yay
 }
-
+install-ranger-plugins() {
+    mkdir -p ~/.config/ranger/plugins
+    git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+}
 install-bottles() {
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	flatpak install bottles
 }
 install-ableton() {
-        #when I first tried it it would start in offline mode and the following command would be broken, somply starting the gui once here is a valid workaround
+        #installer zip must be downloaded inside of ~/Downloads
+
 	flatpak run --command=bottles-cli com.usebottles.bottles new --bottle-name ableton --environment application
-        #as of now the bottles cli is too buggy maybe try this command again some other time#I coulld move the installer to an unhidden location to make this work, I think 
+        cp $host/dotfiles/ableton/ableton.desktop $HOME/.local/share/applications/ableton.desktop
+        update-desktop-database $HOME/.local/share/applications/
 }
 
 

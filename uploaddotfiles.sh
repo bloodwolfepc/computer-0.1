@@ -13,11 +13,11 @@ dotfiles=(
     "$HOME/.config/waybar/config"
     "$HOME/.config/waybar/style.css"
     "$HOME/.config/kitty/kitty.conf"
-    #"$HOME/.config/ranger/rc.conf"
-    #"$HOME/.config/ranger/rifle.conf"
-    #"$HOME/.config/ranger/scope.sh"
-    #"$HOME/.config/ranger/commands.py"
-    #"$HOME/.config/ranger/commands_full.py"
+    "$HOME/.config/ranger/rc.conf"
+    "$HOME/.config/ranger/rifle.conf"
+    "$HOME/.config/ranger/scope.sh"
+    "$HOME/.config/ranger/commands.py"
+    "$HOME/.config/ranger/commands_full.py"
     "$HOME/.config/rofi/config.rasi"
     "$HOME/.config/neofetch/config.conf"
     "/usr/bin/neofetch"
@@ -44,9 +44,6 @@ for file in "${dotfiles[@]}"; do
     echo "copying $file to $destination_with_subdirectory$filename"
     sudo cp -r "$file" "$destination_with_subdirectory$filename"
 done
-
-sudo mkdir -p $host/dotfiles/ranger
-sudo pc -r $HOME/.config/ranger/* $host/dotfiles/ranger/
 
 
 sudo mkdir -p $host/dotfiles/custom

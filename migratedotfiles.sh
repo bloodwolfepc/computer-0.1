@@ -1,6 +1,5 @@
 host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 dotfiles="$host/dotfiles"
-sudo -v
 
 migrate-dot-files() {
     mkdir -p $HOME/.config/nvim
@@ -45,8 +44,6 @@ sudo cp -r $host/assets/cursors/* /usr/share/icons/
 
 }
 
-sudo -k
-
 enable-services() {
 sudo systemctl start sshd.service
 sudo systemctl enable sshd.service
@@ -58,6 +55,11 @@ systemctl --user enable --now syncthing.service
 systemctl --user start --now syncthing.service
 #remember ssh commands ssh-keygen and ssh-copy-id
     "services enabled"
+}
+
+home-permissions() {
+sudo chmod -R u+rwX $HOME
+sudo chown -R $USER:$USER $HOME
 }
 
 laptop-specifics() {
