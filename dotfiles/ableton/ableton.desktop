@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=ableton
+Exec=flatpak run --command=bottles-cli com.usebottles.bottles run -b ableton -p Ableton\ Live\ 11\ Suite
+Type=Application
+Categories=Audio
+Icon=/home/bloodwolfe/.var/app/com.usebottles.bottles/data/bottles/bottles/ableton/icons/abletonlive.png
+

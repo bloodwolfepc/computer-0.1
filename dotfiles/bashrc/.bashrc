@@ -16,7 +16,11 @@ alias snv='sudo nvim'
 alias frvol='pactl set-sink-volume "$(pactl list sinks | grep "Scarlett 4i4 USB Analog Surround 4.0" -B 3 | awk '\''/Name/ {print $NF}'\'')"'
 
 gitpush() {
+<<<<<<< HEAD
 	git add .
+=======
+	git add -a
+>>>>>>> edcd0554 (commit)
 	git commit -m "commit"
 	git push
 }
@@ -30,6 +34,7 @@ qssh() {
 	sshhost=$(cat "$sshhost_file")
 	ssh $sshhost
 }
+<<<<<<< HEAD
 
 nvconf() {
 	nvim ~/.config/nvim/init.lua
@@ -37,19 +42,39 @@ nvconf() {
 #bash commands
 bconf() {
 	nvim ~/.bashrc
+=======
+udd() {
+	update-desktop-database ~/.local/share/applications/
+}
+syncconf() {
+	 nv ~/.unison/default.prf
+ }
+
+nvconf() {
+	nv ~/.config/nvim/init.lua
+}
+#bash commands
+bconf() {
+	nv ~/.bashrc
+>>>>>>> edcd0554 (commit)
 }
 
 bref() {
 	source ~/.bashrc
 }
 
+<<<<<<< HEAD
 gconf() {
+=======
+grubconf() {
+>>>>>>> edcd0554 (commit)
 	sudo nvim /boot/grub/grub.cfg
 }
 
 #pipewire
 
 pwconf() {
+<<<<<<< HEAD
 	sudo nvim /etc/pipewire
 }
 alsaconf() {
@@ -73,6 +98,25 @@ sncref() {
 }
 sncstyref() {
 	/usr/bin/swaync-client -rs
+=======
+	nv /.config/pipewire
+}
+alsaconf() {
+	nv ~/.asoundrc
+}
+#sway commands
+swayconf() {
+	nv ~/.config/sway/config
+}
+monitorconf() {
+	nv ~/.config/sway/monitor-config
+}
+sncconf() {
+	nv ~/.config/swaync/config.json
+}
+sncstyconf() {
+	nv ~/.config/swaync/style.css
+>>>>>>> edcd0554 (commit)
 }
 wbconf() {
 	nv ~/.config/waybar/config
@@ -89,7 +133,11 @@ swayconfgen() {
 }
 
 kittyconf() {
+<<<<<<< HEAD
 	nvim ~/.config/kitty/kitty.conf
+=======
+	nv ~/.config/kitty/kitty.conf
+>>>>>>> edcd0554 (commit)
 }
 
 gtk3conf() {
@@ -140,7 +188,11 @@ khalconf() {
 	nvim ~/.config/khal/config
 }
 vdirsyncconf() {
+<<<<<<< HEAD
 	sudo nvim ~/.config/vdirsyncer/config
+=======
+	nv ~/.config/vdirsyncer/config
+>>>>>>> edcd0554 (commit)
 }
 
 
