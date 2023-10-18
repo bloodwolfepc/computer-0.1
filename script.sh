@@ -1,5 +1,6 @@
 #!/bin/bash
 
+host="$HOME/computer-0.1"
 host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 dotfiles="$host/dotfiles"
 pkg="$host/packages"
@@ -34,7 +35,8 @@ path_list=(
     "$HOME/.zprofile"
     "$HOME/.zshenv"
     "$HOME/.wallpapers"
-    "/usr/share/icons"
+    "/usr/share/icons/Qogir-Recolored-Dracula-Purple"
+    #"/usr/share/icons/"
 )
 
 upload-dotfiles() {
@@ -102,11 +104,11 @@ install-packages() {
                 done < "$packagelist"
                 ;;
             *)
-                echo "package manager unrecognized: $manager"
+                echo "package manager unrecognized: $manager" >> $faillog
                 ;;
         esac
     else 
-            echo "packagelist not found: $packagelist"
+            echo "packagelist not found: $packagelist" >> $faillog
     fi 
 }
 

@@ -1,6 +1,7 @@
-source /bin/custom/pipewire.sh
-source /bin/custom/commands.sh
+source $HOME/.custom/pipewire.sh
+source $HOME/.custom/commands.sh
 source $HOME/computer-0.1/script.sh
+source $HOME/computer-0.1/installer.sh
 [[ -s /etc/profile.d/autojump.zsh ]] && source /etc/profile.d/autojump.zsh
 export VISUAL=nvim
 #export XDG_CURRENT_DESKTOP=sway

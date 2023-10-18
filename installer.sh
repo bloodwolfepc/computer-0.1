@@ -1,10 +1,10 @@
 #!/bin/bash
 
-host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+host="$HOME/computer-0.1"
 dotfiles="$host/dotfiles"
 pkg="$host/packages"
 faillog="$HOME/.custom/faillog.txt"
-source $host/script.sh
+source "$host/script.sh"
 
 run-installer-one() {
         sudo -v
@@ -25,11 +25,13 @@ run-installer-one() {
         sudo -k
 }
 run-installer-two() {
+        sudo -v
         install-bottles
         #install-ableton #not yet working
         install-packages pac emulators
         install-packages aur emulators-aur
         install-packages pac virtualization
+        sudo -k
 }
 
 
@@ -38,7 +40,7 @@ run-installer-two() {
 
 
 
-
+run-installer() {
 
 echo "welcome to the installer script hello"
 sleep 7
@@ -95,5 +97,5 @@ echo "please type your answer (i.e 1)"
                 read answer
         fi
 
-
+}
 
