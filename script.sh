@@ -71,8 +71,14 @@ sudo -v
     if [[ "$answer" =~ ^[Yy]$ ]]; then
         for filepath in "${path_list[@]}"; do 
             non_home_dir=$(echo "$filepath" | sed "s|$HOME||")
-            echo "copying $dotfiles$non_home_dir to $filepath"
-            sudo cp -r "$dotfiles$non_home_dir" "$filepath"
+            usr="/user"
+                if [[ $filepath == $HOME* ]]; then
+                    echo "copying $dotfiles$usr$non_home_dir to $filepath"
+                    sudo cp -r "$dotfiles$usr$non_home_dir" "$filepath"
+                else
+                    echo "copying $dotfiles$non_home_dir to $filepath"
+                    sudo cp -r "$dotfiles$non_home_dir" "$filepath"
+                fi
             echo "-------------"
         done
     else
