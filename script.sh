@@ -1,7 +1,7 @@
 #!/bin/bash
 
 host="$HOME/computer-0.1"
-#host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 dotfiles="$host/dotfiles"
 pkg="$host/packages"
 faillog="$HOME/.custom/faillog.txt"
@@ -96,7 +96,7 @@ install-packages() {
     if [ -f "$packagelist" ]; then
         case "$manager" in 
             "pac")
-                while IFS= read -r package; do 
+                while IFS=read -r package; do 
                     if [ -n "$package" ]; then
                         sudo pacman -S --needed --noconfirm "$package" || echo "pac package not found: $package" >> $faillog
                     fi 
