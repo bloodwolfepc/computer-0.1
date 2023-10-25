@@ -1,13 +1,12 @@
-
 alias nv='nvim'
 alias snv='sudo nvim'
-
+alias sr'sudo ranger'
 alias frvol='pactl set-sink-volume "$(pactl list sinks | grep "Scarlett 4i4 USB Analog Surround 4.0" -B 3 | awk '\''/Name/ {print $NF}'\'')"'
 alias mod1="sudo chmod -R u+rwX"
 alias mod2="sudo chown -R $USER:$USER"
 
 comconf() {
-      nv /bin/custom/commands.sh
+      nv $HOME/.custom/commands.sh
    }
 
 
@@ -23,8 +22,31 @@ size() {
 	du -sh .
 }
 
+update() {
+	sudo -v
+	sudo pacamn -Syu --needed --noconfirm
+	yay -Syu --needed --noconfirm
+	sudo -k
+}
 
-
+mplay() {
+	playerctl play
+}
+mpause() {
+	playerctl pause
+}
+mnext() {
+	playerctl next
+}
+mprev() {
+	playerctl previous
+}
+wpconf() {
+	r ~/.config/wireplumber
+}
+wpref() {
+systemctl --user restart wireplumber pipewire pipewire-pulse
+}
 
 syncconf() {
 	 nv ~/.unison/default.prf
@@ -51,7 +73,7 @@ grubconf() {
 #pipewire
 
 pwconf() {
-	nv /.config/pipewire
+	r /.config/pipewire
 }
 alsaconf() {
 	nv ~/.asoundrc

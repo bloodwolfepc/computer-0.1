@@ -1,6 +1,7 @@
 #!/bin/bash
 album_art=$(playerctl -p tidal-hifi metadata mpris:artUrl)
-if [[ -z $album_art ]] 
+#album_art=$(playerctl metadata mpris:artUrl)
+if [[ -z $album_art ]]
 then
    # tidal is dead, we should die to.
    exit

@@ -25,6 +25,8 @@ output HDMI-A-1 {
 	}
 
 workspace 9 output HDMI-A-1
+
+input 1356:2508:Sony_Interactive_Entertainment_Wireless_Controller_Touchpad map_to_output DP-1
 	
 
 

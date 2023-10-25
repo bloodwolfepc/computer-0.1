@@ -169,6 +169,8 @@ for_window [instance="steamwebhelper" class="steam"] move container to workspace
 
 for_window [class="tidal-hifi"] move container to workspace 11
 for_window [title="discord-screenaudio"] move container to workspace 6
+for_window [title="Reaper Keys"] resize shrink width 55ppt, splitv
+for_window [title="Friends List"] resize shrink width 70ppt, splitv
 ##for_window [title="Rain World"] move container to workspace 7
 
 

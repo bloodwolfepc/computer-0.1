@@ -6,3 +6,6 @@ virt-viewer
 swtpm
 iptables-nft
 dnsmasq
+
+
+powertop
