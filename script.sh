@@ -106,7 +106,7 @@ install-packages() {
             "aur")
                 while IFS= read -r package; do 
                     if [ -n "$package" ]; then 
-                        yay -S --needed --noconfim "$package" || echo "aur package not found: $package" >> $faillog
+                        yay -S --needed --noconfirm "$package" || echo "aur package not found: $package" >> $faillog
                     fi 
                 done < "$packagelist"
                 ;;
