@@ -97,7 +97,7 @@ install-packages() {
     if [ -f "$packagelist" ]; then
         case "$manager" in 
             "pac")
-                while IFS=read -r package; do 
+                while IFS= read -r package; do 
                     if [ -n "$package" ]; then
                         sudo pacman -S --needed --noconfirm "$package" || echo "pac package not found: $package" >> $faillog
                     fi 
