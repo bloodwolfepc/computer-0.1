@@ -50,12 +50,12 @@ for filepath in "${path_list[@]}"; do
         if [ "$first_two" = "$HOME" ]; then
             directory_fixed_name="/$(echo $directory | sed 's|/home/[^/]*|user|')"
             sudo mkdir -p "$dotfiles$directory_fixed_name"
-            sudo cp -r "$directory/$base" "$dotfiles$directory_fixed_name/$base"
-            echo "copying $directory/$base to $dotfiles$directory_fixed_name/$base"
+            sudo cp -r "$directory/$base" "$dotfiles$directory_fixed_name"
+            echo "copying $directory/$base to $dotfiles$directory_fixed_name"
         else
             sudo mkdir -p "$dotfiles$directory"
-            sudo cp -r "$directory/$base" "$dotfiles$directory/$base"
-            echo "copying $directory/$base to $dotfiles$directory/$base"
+            sudo cp -r "$directory/$base" "$dotfiles$directory"
+            echo "copying $directory/$base to $dotfiles$directory"
         fi
 echo "-------------"
 done
