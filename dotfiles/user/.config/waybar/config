@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["custom/notification", "sway/mode", "sway/scratchpad", "sway/window"],
     "modules-center": ["image#album-art", "custom/media"],
-    "modules-right": ["mpd", "custom#vpn", "pulseaudio", "network", "cpu", "memory", "custom/weather", "keyboard-state", "battery", "battery#bat2","clock#date", "clock", "tray"],
+    "modules-right": ["mpd", "custom#vpn", "pulseaudio", "network", "cpu", "memory", "custom/weather", "battery", "battery#bat2","clock#date", "clock", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
