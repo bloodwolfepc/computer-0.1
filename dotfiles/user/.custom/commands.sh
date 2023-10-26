@@ -21,50 +21,6 @@ udd() {
 size() {
 	du -sh .
 }
-sync() {
-	unison default
-}
-
-
-ltpowersave() {
-
-#TODO: work on governer managemnt, the rest is okay
-sudo -v
-for i in $(seq 4 $(nproc)); do
-  sudo bash -c "echo 0 > /sys/devices/system/cpu/cpu$i/online"
-done
-echo "cpu cores limited to 4"
-swaymsg output eDP-2 resolution 2560x1600@60Hz
-sleep 1
-swaymsg reload
-sleep 1
-sudo cpupower frequency-set -g powersave
-sudo -k
-}
-
-ltpowerhigh() {
-sudo -v
-mod1 /sys/devices/system/cpu/*
-mod2 /sys/devices/system/cpu/*
-
-for x in /sys/devices/system/cpu/cpu{4..15}*/online; do
-  echo 1 > "$x"
-  echo "power restored core $x"
-done
-
-swaymsg output eDP-2 resolution 2560x1600@120Hz
-echo "120Hz enabled"
-sleep 1
-swaymsg reload
-sleep 1
-sudo cpupower frequency-set -g performance 
-sudo -k
-}
-
-syncconf() {
-	 nv ~/.unison/default.prf
- }
-
 
 update() {
 	sudo -v
