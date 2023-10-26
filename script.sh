@@ -1,7 +1,7 @@
 #!/bin/bash
 
 host="$HOME/computer-0.1"
-host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 dotfiles="$host/dotfiles"
 pkg="$host/packages"
 faillog="$HOME/.custom/faillog.txt"
@@ -71,13 +71,14 @@ sudo -v
     if [[ "$answer" =~ ^[Yy]$ ]]; then
         for filepath in "${path_list[@]}"; do 
             non_home_dir=$(echo "$filepath" | sed "s|$HOME||")
+            filepath_no_base=$(dirname "$filepath")
             usr="/user"
                 if [[ $filepath == $HOME* ]]; then
-                    echo "copying $dotfiles$usr$non_home_dir to $filepath"
-                    sudo cp -r "$dotfiles$usr$non_home_dir" "$filepath"
+                    echo "copying $dotfiles$usr$non_home_dir to $filepath_no_base"
+                    sudo cp -r "$dotfiles$usr$non_home_dir" "$filepath_no_base"
                 else
-                    echo "copying $dotfiles$non_home_dir to $filepath"
-                    sudo cp -r "$dotfiles$non_home_dir" "$filepath"
+                    echo "copying $dotfiles$non_home_dir to $filepath_no_base"
+                    sudo cp -r "$dotfiles$non_home_dir" "$filepath_no_base"
                 fi
             echo "-------------"
         done
