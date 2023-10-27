@@ -15,8 +15,8 @@ bindsym $mod+n exec kitty --directory ~/notebook
 #bindsym $mod+b exec kitty -e bluetoothctl
 
 #autostart progs
-exec steam
-exec /home/bloodwolfe/discord-screenaudio/build/discord-screenaudio
+#exec steam
+#exec /home/bloodwolfe/discord-screenaudio/build/discord-screenaudio
 #exec_always /bin/custom/steamgamename.sh #works pretty badly tbh
 
 exec ydottoold

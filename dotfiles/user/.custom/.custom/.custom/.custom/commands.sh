@@ -1,19 +1,13 @@
+
 alias nv='nvim'
 alias snv='sudo nvim'
-alias sr'sudo ranger'
+
 alias frvol='pactl set-sink-volume "$(pactl list sinks | grep "Scarlett 4i4 USB Analog Surround 4.0" -B 3 | awk '\''/Name/ {print $NF}'\'')"'
 alias mod1="sudo chmod -R u+rwX"
 alias mod2="sudo chown -R $USER:$USER"
-brightness="/sys/class/backlight/amdgpu_bl2/brightness"
-
-setbr() {
-	mod1 $brightness
-	mod2 $brightness
-	echo $1 > $brightness
-}
 
 comconf() {
-      nv $HOME/.custom/commands.sh
+      nv /bin/custom/commands.sh
    }
 
 
@@ -29,31 +23,8 @@ size() {
 	du -sh .
 }
 
-update() {
-	sudo -v
-	sudo pacamn -Syu --needed --noconfirm
-	yay -Syu --needed --noconfirm
-	sudo -k
-}
 
-mplay() {
-	playerctl play
-}
-mpause() {
-	playerctl pause
-}
-mnext() {
-	playerctl next
-}
-mprev() {
-	playerctl previous
-}
-wpconf() {
-	r ~/.config/wireplumber
-}
-wpref() {
-systemctl --user restart wireplumber pipewire pipewire-pulse
-}
+
 
 syncconf() {
 	 nv ~/.unison/default.prf
@@ -80,7 +51,7 @@ grubconf() {
 #pipewire
 
 pwconf() {
-	r /.config/pipewire
+	nv /.config/pipewire
 }
 alsaconf() {
 	nv ~/.asoundrc
@@ -177,57 +148,6 @@ setsink() {
 speakertest() {
 	speaker-test -c 2 -t wav -l 1
 }
-sync() {
-	unison default
-}
-
-#laptop powersave
-sync() {
-	unison default
-}
-
-
-ltpowersave() {
-
-sudo -v
-for i in $(seq 4 $(nproc)); do
-  sudo bash -c "echo 0 > /sys/devices/system/cpu/cpu$i/online"
-done
-echo "cpu cores limited to 4"
-swaymsg output eDP-2 resolution 2560x1600@60Hz
-sleep 1
-swaymsg reload
-sleep 1
-sudo cpupower frequency-set -g powersave
-setbr 100
-sudo -k
-}
-
-ltpowerhigh() {
-sudo -v
-mod1 /sys/devices/system/cpu/*
-mod2 /sys/devices/system/cpu/*
-
-for x in /sys/devices/system/cpu/cpu{4..15}*/online; do
-  echo 1 > "$x"
-  echo "power restored core $x"
-done
-
-swaymsg output eDP-2 resolution 2560x1600@120Hz
-echo "120Hz enabled"
-sleep 1
-swaymsg reload
-sleep 1
-sudo cpupower frequency-set -g performance
-setbr 255
-sudo -k
-}
-
-syncconf() {
-	 nv ~/.unison/default.prf
- }
-
-
 
 #reminder of ~/.config/waybar/custom/tidal/albumart.sh
 
