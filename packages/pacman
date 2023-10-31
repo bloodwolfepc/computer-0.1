@@ -59,3 +59,7 @@ wl-mirror
 hid-tools
 rsync
 lib32-licanberra
+v4l2loopback
+v4l2loopback-utils
+v4l-utils
+linux-zen-headers
