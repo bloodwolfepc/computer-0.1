@@ -37,6 +37,7 @@ path_list=(
     "$HOME/.wallpapers"
     "/usr/share/icons/Qogir-Recolored-Dracula-Purple"
     #"/usr/share/icons/"
+    "$HOME/.config/qutebrowser/config.py"
 )
 
 upload-dotfiles() {

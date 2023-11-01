@@ -63,3 +63,6 @@ v4l2loopback
 v4l2loopback-utils
 v4l-utils
 linux-zen-headers
+qutebrowser
+pass
+python-tldextract

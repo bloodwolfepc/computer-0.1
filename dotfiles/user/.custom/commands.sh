@@ -5,6 +5,16 @@ alias frvol='pactl set-sink-volume "$(pactl list sinks | grep "Scarlett 4i4 USB 
 alias mod1="sudo chmod -R u+rwX"
 alias mod2="sudo chown -R $USER:$USER"
 brightness="/sys/class/backlight/amdgpu_bl2/brightness"
+sshhost_file="$HOME/.hostip"
+sshhost=$(cat "$sshhost_file")
+
+disc() {
+	discord-screenaudio/build/discord-screenaudio
+}
+
+quteconf() {
+	r ~/.config/qutebrowser
+}
 
 setbr() {
 	mod1 $brightness
@@ -31,7 +41,7 @@ size() {
 
 update() {
 	sudo -v
-	sudo pacamn -Syu --needed --noconfirm
+	sudo pacman -Syu --needed --noconfirm
 	yay -Syu --needed --noconfirm
 	sudo -k
 }
@@ -199,7 +209,7 @@ sleep 1
 swaymsg reload
 sleep 1
 sudo cpupower frequency-set -g powersave
-setbr 100
+setbr 40
 sudo -k
 }
 
