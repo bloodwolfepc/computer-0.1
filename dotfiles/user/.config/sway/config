@@ -1,3 +1,7 @@
+#exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+#exec hash dbus-update-activation-environment 2>/dev/null && \
+     #dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+#:for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
 include "monitor-config"
 include "style-config"
 exec systemctl --user import-envionment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
@@ -29,6 +33,7 @@ bindsym $mod+shift+s exec --no-startup-id flameshot full -c -p ~/Pictures
 
 #no mouse acc
 input * accel_profile flat
+#input * pointer_accel -0.5
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -46,6 +51,12 @@ for_window [app_id="one.alynx.showmethekey" title="Floating Window - Show Me The
 #bindsym $mod+q exec ~/launchoptions.sh
 
 
+#floating kitty
+bindsym $mod+t exec $HOME/.custom/floatingkitty.sh
+for_window [title="floatingkitty"] floating enable, border pixel 1, client.focused #ffffff #000000 #ffffff #000000 #ffffff, resize set width 20ppt height 40ppt, move position 79ppt 59ppt
+
+
+#, resize shrink height 55ppt, move position width 100px, client.focused #ffffff #000000 #ffffff #000000 #ffffff
 
 
 ### Idle configuration
@@ -192,7 +203,7 @@ for_window [title="Friends List"] resize shrink width 70ppt, splitv
     #bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
-    bindsym $mod+g fullscreen
+    bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+shift+space floating toggle

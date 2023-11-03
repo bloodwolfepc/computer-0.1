@@ -1,9 +1,19 @@
+#export SDL_VIDEODRIVER=wayland
+#export _JAVA_AWT_WM_NONREPARENTING=1
+#export QT_QPA_PLATFORM=wayland
+#export XDG_CURRENT_DESKTOP=sway
+#export XDG_SESSION_DESKTOP=sway
+
+
+
 source $HOME/.custom/pipewire.sh
 source $HOME/.custom/commands.sh
 source $HOME/computer-0.1/script.sh
 source $HOME/computer-0.1/installer.sh
 [[ -s /etc/profile.d/autojump.zsh ]] && source /etc/profile.d/autojump.zsh
 export VISUAL=nvim
+#export LD_PRELOAD=/usr/lib/modules/6.5.9-zen2-1-zen/updates/dkms/v4l2loopback.ko.zst
+
 #export XDG_CURRENT_DESKTOP=sway
 
 source ~/.zshplug/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

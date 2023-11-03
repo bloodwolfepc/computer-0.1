@@ -7,7 +7,17 @@ alias mod2="sudo chown -R $USER:$USER"
 brightness="/sys/class/backlight/amdgpu_bl2/brightness"
 sshhost_file="$HOME/.hostip"
 sshhost=$(cat "$sshhost_file")
+vcam() {
+	sudo rmmod v4l2loopback
+	sudo modprobe v4l2loopback video_nr=9 card_label=Video-Loopback exclusive_caps=1
+}
+sense() {
+ swaymsg input 9610:54:Glorious_Model_O pointer_accel $1
+}
 
+customconf() {
+	r $HOME/.custom
+}
 disc() {
 	discord-screenaudio/build/discord-screenaudio
 }
@@ -102,6 +112,10 @@ swayconf() {
 monitorconf() {
 	nv ~/.config/sway/monitor-config
 }
+swaystyconf() {
+	nv ~/.config/sway/style-config
+}
+
 sncconf() {
 	nv ~/.config/swaync/config.json
 }
@@ -244,9 +258,7 @@ syncconf() {
 #fun stuff :3
 
 albumbg() {
-	swaybg -i /tmp/cover.jpeg
-	sleep 2
-	swaymsg reload
+	swaybg -i /tmp/cover.jpeg	
 }
 bgclear() {
 	swaybg -c

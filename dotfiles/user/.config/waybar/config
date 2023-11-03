@@ -46,7 +46,7 @@
     },
 
 "image#album-art": {
-     "exec":"/bin/custom/albumart.sh",
+     "exec":"$HOME/.custom/albumart.sh",
      "size": 18,
      "interval": 5,  
 },

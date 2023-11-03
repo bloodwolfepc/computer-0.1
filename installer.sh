@@ -59,13 +59,13 @@ echo "please type your answer (i.e 1)"
                 echo "preparing..."
                 sleep 4
                 echo "installing install array"
-                wait 0.2
+                sleep 0.2
                 echo "executing"
-                wait 0.2
+                sleep 0.2
                 echo "generating install"
-                wait 0.2
+                sleep 0.2
                 echo "installing..."
-                wait 0.4
+                sleep 0.4
                 run-installer-one
                 sleep 3
                 echo "congratulations! you have successfully run the installer!"

@@ -109,7 +109,7 @@ config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:90.0) Gecko
 #   - adblock: Use Brave's ABP-style adblocker
 #   - hosts: Use hosts blocking
 #   - both: Use both hosts blocking and Brave's ABP-style adblocker
-c.content.blocking.method = 'adblock'
+c.content.blocking.method = 'both'
 
 # Load images automatically in web pages.
 # Type: Bool
@@ -184,8 +184,9 @@ c.colors.webpage.darkmode.policy.images = 'never'
 
 # Font used for the hints.
 # Type: Font
-c.fonts.hints = 'Monaco'
+c.fonts.hints = 'bold default_size default_family'
 
 # Bindings for normal mode
 config.bind('00', ':spawn --userscript qute-pass')
-config.bind('<Ctrl+/>', 'hint links spawn --detach mpv {hint-url}')
+config.bind('<Ctrl+/>', 'hint links spawn --detach mpv --ytdl-format=best {hint-url}')
+#mpv mpv --ytdl-format=best

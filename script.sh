@@ -39,6 +39,7 @@ path_list=(
     #"/usr/share/icons/"
     "$HOME/.config/qutebrowser/config.py"
     "$HOME/.config/qutebrowser/quickmarks"
+    "$HOME/.config/qutebrowser/greasemonkey"
 )
 
 upload-dotfiles() {
