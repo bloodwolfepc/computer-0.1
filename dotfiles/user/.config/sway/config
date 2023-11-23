@@ -27,7 +27,8 @@ exec ydottoold
 exec swaync
 bindsym $mod+Shift+n exec swaync-client -t -sw
 exec kitty --hold neofetch
-exec polkit-dumb-agent
+#exec polkit-dumb-agent
+exec_always /usr/bin/lxqt-policykit-agent
 bindsym $mod+s exec --no-startup-id flameshot gui
 bindsym $mod+shift+s exec --no-startup-id flameshot full -c -p ~/Pictures
 
@@ -91,7 +92,10 @@ input type:touchpad {
 	accel_profile "flat"
 	pointer_accel 0.5
 }
-
+input type:pointer {
+    accel_profile "flat"
+    pointer_accel 0
+}
 ### Key bindings
 #
 # Basics:

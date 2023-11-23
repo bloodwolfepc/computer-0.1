@@ -5,7 +5,7 @@ host="$HOME/computer-0.1"
 dotfiles="$host/dotfiles"
 pkg="$host/packages"
 faillog="$HOME/.custom/faillog.txt"
-
+#source "$host/pkglist.sh"
 
 path_list=(
     "$HOME/.config/nvim/init.lua"
@@ -40,6 +40,7 @@ path_list=(
     "$HOME/.config/qutebrowser/config.py"
     "$HOME/.config/qutebrowser/quickmarks"
     "$HOME/.config/qutebrowser/greasemonkey"
+    "$HOME/.config/mpv/mpv.conf"
 )
 
 upload-dotfiles() {
@@ -96,7 +97,7 @@ sudo -k
 install-packages() { 
     mkdir -p $HOME/.custom
     local manager="$1"
-    local packagelist="$2"
+    local packagelist="$2"]
     if [ -f "$packagelist" ]; then
         case "$manager" in 
             "pac")
@@ -199,4 +200,9 @@ install-ableton() {
         cp $host/dotfiles/ableton/ableton.desktop $HOME/.local/share/applications/ableton.desktop
         update-desktop-database $HOME/.local/share/applications/
 }
+
+amdvlk-remove() {
+sudo pacman -R amdvlk lib32-amdvlk --noconfirm
+}
+
 

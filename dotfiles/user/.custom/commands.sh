@@ -5,8 +5,28 @@ alias frvol='pactl set-sink-volume "$(pactl list sinks | grep "Scarlett 4i4 USB 
 alias mod1="sudo chmod -R u+rwX"
 alias mod2="sudo chown -R $USER:$USER"
 brightness="/sys/class/backlight/amdgpu_bl2/brightness"
-sshhost_file="$HOME/.hostip"
-sshhost=$(cat "$sshhost_file")
+
+#ip
+#sshhost_file="$HOME/.hostip"
+
+
+#sshhost=$(cat "$sshhost_file")
+#lbip1=$(cat "$HOME/.ip/lbip1")
+#lbip2=$(cat "$HOME/.ip/lbip2")
+
+
+
+gsdtlo() {
+	wl-copy "gamemoderun mangohud gamescope -e -f -W 1920 -H 1080 -r 144 %command%"
+	echo "gsdtlo on clipboard"
+}
+
+ssdtlo() {
+	wl-copy "gamemoderun mangohud gamescope -e -f -w 3820 -h 2160 -W 1920 -H 1080 -r 144 %command%"
+	echo "ssdtlo on clipboard"
+}
+
+
 vcam() {
 	sudo rmmod v4l2loopback
 	sudo modprobe v4l2loopback video_nr=9 card_label=Video-Loopback exclusive_caps=1
@@ -18,9 +38,9 @@ sense() {
 customconf() {
 	r $HOME/.custom
 }
-disc() {
-	discord-screenaudio/build/discord-screenaudio
-}
+#disc() {
+#	discord-screenaudio/build/discord-screenaudio
+#}
 
 quteconf() {
 	r ~/.config/qutebrowser
@@ -52,6 +72,7 @@ size() {
 update() {
 	sudo -v
 	sudo pacman -Syu --needed --noconfirm
+	flatpack update
 	yay -Syu --needed --noconfirm
 	sudo -k
 }
@@ -87,7 +108,9 @@ zconf() {
 	nv ~/.zshrc
 }
 
-
+mpvconf() {
+	nv ~/.config/mpv/mpv.conf
+}
 
 zref() {
 	source ~/.zshrc
@@ -184,13 +207,6 @@ nfconf() {
 nf2conf() {
 	sudo nvim /usr/bin/neofetch
 }
-khalconf() {
-	nvim ~/.config/khal/config
-}
-vdirsyncconf() {
-	nv ~/.config/vdirsyncer/config
-}
-
 
 sinks() {
 	pactl list sinks | awk '/Sink #|Name:/'
@@ -206,9 +222,6 @@ sync() {
 }
 
 #laptop powersave
-sync() {
-	unison default
-}
 
 
 ltpowersave() {
@@ -265,76 +278,38 @@ bgclear() {
 	swaymsg reload
 }
 
-#houselights
 
+#LIGHTING
 off() {
 	
 	(echo '{"id":1,"method":"setState","params":{"state":false}}' | nc -u -w 1 192.168.0.153 38899) &
-	(echo '{"id":1,"method":"setState","params":{"state":false}}' | nc -u -w 1 192.168.0.154 38899) &
-	wait &
+	(echo '{"id":1,"method":"setState","params":{"state":false}}' | nc -u -w 1 192.168.0.154 38899)
 }
-dim() {
-	(echo '{"id":1,"method":"setPilot","params":{"c":40,"w":120,"dimming":20}}' | nc -u -w 1 192.168.0.153 38899) &
-	(echo '{"id":1,"method":"setPilot","params":{"c":40,"w":120,"dimming":20}}' | nc -u -w 1 192.168.0.154 38899) &
-	wait &
-}
-
 
 on() {
-	(echo '{"id":1,"method":"setState","params":{"state":true}}' | nc -u -w 1 192.168.0.153 38899) &
-	(echo '{"id":1,"method":"setState","params":{"state":true}}' | nc -u -w 1 192.168.0.154 38899) &
-	wait &
+	(echo '{"id":1,"method":"setState","params":{"state":true}}' | nc -u -w 1 $lbip1 38899) &
+	(echo '{"id":1,"method":"setState","params":{"state":true}}' | nc -u -w 1 $lbip2 38899)
 }
-pink() {
-	(echo '{"id":1,"method":"setPilot","params":{"r":255,"g":80,"b":180,"dimming":100}}' | nc -u -w 1 192.168.0.153 38899) &
-	(echo '{"id":1,"method":"setPilot","params":{"r":255,"g":80,"b":180,"dimming":100}}' | nc -u -w 1 192.168.0.154 38899) &
-	wait &
-}
-purple() {
-	(echo '{"id":1,"method":"setPilot","params":{"r":123,"g":62,"b":170,"dimming":100}}' | nc -u -w 1 192.168.0.153 38899) &
-	(echo '{"id":1,"method":"setPilot","params":{"r":123,"g":62,"b":170,"dimming":100}}' | nc -u -w 1 192.168.0.154 38899) &
-	wait &
-}
-blue() {
-	(echo '{"id":1,"method":"setPilot","params":{"r":0,"g":0,"b":255,"dimming":100}}' | nc -u -w 1 192.168.0.153 38899) &
-	(echo '{"id":1,"method":"setPilot","params":{"r":0,"g":0,"b":255,"dimming":100}}' | nc -u -w 1 192.168.0.154 38899) &
-	wait &
-}
-red() {
-	(echo '{"id":1,"method":"setPilot","params":{"r":255,"g":0,"b":0,"dimming":100}}' | nc -u -w 1 192.168.0.153 38899) &
-	(echo '{"id":1,"method":"setPilot","params":{"r":255,"g":0,"b":0,"dimming":100}}' | nc -u -w 1 192.168.0.154 38899) &
-	wait &
-}
-expred() {
-	(echo '{"id":1,"method":"setPilot","params":{"r":255,"g":0,"b":0,"dimming":30}}' | nc -u -w 1 192.168.0.153 38899) &
-	(echo '{"id":1,"method":"setPilot","params":{"r":255,"g":0,"b":0,"dimming":30}}' | nc -u -w 1 192.168.0.154 38899) &
-	wait &
-}
-green() {
-	(echo '{"id":1,"method":"setPilot","params":{"r":0,"g":255,"b":0,"dimming":100}}' | nc -u -w 1 192.168.0.153 38899) &
-	(echo '{"id":1,"method":"setPilot","params":{"r":0,"g":255,"b":0,"dimming":100}}' | nc -u -w 1 192.168.0.154 38899) &
-	wait &
+#change this to a for loop
+cwlight() {
+	(echo '{"id":1,"method":"setPilot","params":{"c":'$1',"w":'$2',"dimming":'$3'}}' | nc -u -w 1 $lbip1 38899) &
+	(echo '{"id":1,"method":"setPilot","params":{"c":'$1',"w":'$2',"dimming":'$3'}}' | nc -u -w 1 $lbip2 38899)
 }
 
-
-coldwhite() {
-	(echo '{"id":1,"method":"setPilot","params":{"c":200,"dimming":100}}' | nc -u -w 1 192.168.0.153 38899) &
-	(echo '{"id":1,"method":"setPilot","params":{"c":200,"dimming":100}}' | nc -u -w 1 192.168.0.154 38899) &
-	wait &
+rgblight() {
+	(echo '{"id":1,"method":"setPilot","params":{"r":'$1',"g":'$2',"b":'$3',"dimming":'$4'}}' | nc -u -w 1 $lbip1 38899) &
+	(echo '{"id":1,"method":"setPilot","params":{"r":'$1',"g":'$2',"b":'$3',"dimming":'$4'}}' | nc -u -w 1 $lbip2 38899)
 }
 
-25white() {
-	(echo '{"id":1,"method":"setPilot","params":{"c":64,"w":64,"dimming":90}}' | nc -u -w 1 192.168.0.153 38899) &
-	(echo '{"id":1,"method":"setPilot","params":{"c":64,"w":64,"dimming":90}}' | nc -u -w 1 192.168.0.154 38899) &
-	wait &
-}
-warmwhite() {
-	(echo '{"id":1,"method":"setPilot","params":{"c":40,"w":160,"dimming":80}}' | nc -u -w 1 192.168.0.153 38899) &
-	(echo '{"id":1,"method":"setPilot","params":{"c":40,"w":160,"dimming":80}}' | nc -u -w 1 192.168.0.154 38899) &
-	wait &
-}
-
-
+warmwhite() {cwlight 40 140 80}
+25whtie() {cwlight 64 64 90}
+coldwhtie() {cwlight 200 0 100}
+red() {rgblight 255 0 0 100}
+green() {rgblight 0 255 0 100}
+blue() {rgblight 0 0 255 100}
+purple() {rgblight 123 62 170 100}
+pink() {rgblight 255 80 180 100}
+dim() {cwlight 40 120 20}
 alarm() {
 
 	local num_repeats=$1
