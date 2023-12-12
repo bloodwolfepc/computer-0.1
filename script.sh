@@ -2,12 +2,12 @@
 
 host="$HOME/computer-0.1"
 #host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-dotfiles="$host/dotfiles"
+#dotfiles="$host/dotfiles"
 pkg="$host/packages"
 faillog="$HOME/.custom/faillog.txt"
 #source "$host/pkglist.sh"
 
-path_list=(
+baseprofiles=( #dotfile_array
     "$HOME/.config/nvim/init.lua"
     "$HOME/.config/sway/config"
     "$HOME/.config/sway/monitor-config"
@@ -43,7 +43,129 @@ path_list=(
     "$HOME/.config/mpv/mpv.conf"
 )
 
-upload-dotfiles() {
+sparkle=(
+    "$HOME/.config/sway/style-config"
+)
+blackout=(
+    "$HOME/.config/sway/style-config"
+)
+
+
+
+
+#todo add backup and deletion system
+profile() {
+sudo -v
+function=$1
+profile_name=$2
+eval "specified_array=(\$${profile_name}[@])"
+destination="$host/dotfiles/$profile_name"
+
+if [ -z "$profile_name" ] || [ ! -v "$profile_name[@]" ]; then
+    echo "no such profile recognised"
+    return 1
+fi
+
+if [ "$function" = "save" ]; then
+sudo mkdir -p "$destination"
+for filepath in "${specified_array[@]}"; do
+    directory=$(dirname "$filepath")
+    base=$(basename "$filepath")
+     #change $HOME to 'user' if $HOME exists in filepath
+    first_two=$(echo "$directory" | awk -F'/' '{print "/" $2 "/" $3}' )
+        if [ "$first_two" = "$HOME" ]; then
+            directory_fixed_name="/$(echo $directory | sed 's|/home/[^/]*|user|')"
+            sudo mkdir -p "$destination$directory_fixed_name"
+            sudo cp -r "$filepath" "$destination$directory_fixed_name"
+            echo "copying $filepath to $destination$directory_fixed_name"
+        else
+            sudo mkdir -p "$destination$directory"
+            sudo cp -r "$filepath" "$destination$directory"
+            echo "copying $filepath to $destination$directory"
+        fi
+echo "-------------"
+done
+echo "process finish"
+echo "computersave specified directores to $destination"
+sudo -k
+
+
+#else
+elif [ "$function" = "load" ]; then
+    sudo -v
+        echo -n "are you sure you want to migrate dotfiles? This will overwrite existing dotfiles (Y/N): "
+        read answer
+
+    if [[ "$answer" =~ ^[Yy]$ ]]; then
+        for filepath in  "${specified_array[@]}"; do
+            non_home_dir=$(echo "$filepath" | sed "s|$HOME||")
+            filepath_no_base=$(dirname "$filepath")
+            usr="/user"
+            profilename="/$profile_name"
+                if [[ $filepath == $HOME* ]]; then
+                    echo "copying $dotfiles$profilename$usr$non_home_dir to $filepath_no_base"
+                    sudo cp -r "$dotfiles$profilename$usr$non_home_dir" "$filepath_no_base"
+                else
+                    echo "copying $dotfiles$profilename$non_home_dir to $filepath_no_base"
+                    sudo cp -r "$dotfiles$profilename$non_home_dir" "$filepath_no_base"
+                fi
+            echo "-------------"
+        done
+    else echo "canceled"
+        echo "process finished"
+        sudo -k
+    fi
+else
+    echo "function not recognised"
+fi
+}
+
+
+
+
+
+run-download-script() {
+sudo -v
+        echo -n "are you sure you want to migrate dotfiles? This will overwrite existing dotfiles (Y/N): "
+        read answer
+
+    if [[ "$answer" =~ ^[Yy]$ ]]; then
+        for filepath in "${path_list[@]}"; do 
+            non_home_dir=$(echo "$filepath" | sed "s|$HOME||")
+            filepath_no_base=$(dirname "$filepath")
+            usr="/user"
+                if [[ $filepath == $HOME* ]]; then
+                    echo "copying $dotfiles$usr$non_home_dir to $filepath_no_base"
+                    sudo cp -r "$dotfiles$usr$non_home_dir" "$filepath_no_base"
+                else
+                    echo "copying $dotfiles$non_home_dir to $filepath_no_base"
+                    sudo cp -r "$dotfiles$non_home_dir" "$filepath_no_base"
+                fi
+            echo "-------------"
+        done
+    else
+        echo "migrate dotfiles canceled"
+    fi
+echo "precoess finish"
+sudo -k
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+run-upload-script() {
 sudo -v
 sudo mkdir -p "$dotfiles"
 for filepath in "${path_list[@]}"; do
@@ -67,7 +189,7 @@ echo "process finish"
 sudo -k
 }
 
-migrate-dotfiles() {
+run-download-script() {
 sudo -v
         echo -n "are you sure you want to migrate dotfiles? This will overwrite existing dotfiles (Y/N): "
         read answer

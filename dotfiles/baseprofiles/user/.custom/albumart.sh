@@ -10,6 +10,7 @@
 #echo "/tmp/cover.jpeg"
 #
 album_art=$(playerctl -p firefox metadata mpris:artUrl)
+#album_art=$(playerctl -p firefox metadata mpris:artUrl)
 #album_art=$(playerctl metadata mpris:artUrl)
 if [[ -z $album_art ]]
 then
