@@ -1,13 +1,13 @@
 #packagelist
+declare -A aur
+declare -A pac
+declare -A flat
+aur["amd_drivers"]="
+mesa-git
+lib32-mesa-git
+"
 
-amd_drivers=(
-mesa
-lib32-mesa
-vulkan-radeion
-lib32-vulkan-radeon
-)
-
-audio_drivers=(
+pac["audio_drivers"]="
 pipewire
 lib32-pipewire
 pipewire-docs
@@ -20,23 +20,23 @@ lib32-alsa-lib
 lib32-alsa-plugins
 alsa-utils
 lib32-pipewire-jack
-)
+"
 
 
-fonts=(
+pac["fonts"]="
 noto-fonts-emoji
 noto-fonts
 noto-fonts-emoji
 noto-fonts-extra
 ttf-sourcecodepro
-)
+"
 
-fonts_aur=(
+aur["fonts_aur"]="
 ttf-monaco
 adobe-source-has-fonts
 ttf-font-awesome
-
-aur=(
+"
+aur["aurpkg"]="
 wttrbar-git
 wttr
 dotnet-runtime-bin
@@ -70,18 +70,16 @@ bluez-git
 vrrtest-git
 cli-visualizer
 autojump
-)
+"
 
-virtualization=(
-"qemu-full"
-"libvirt
-"edk2-ovmf
+pac["virtualization"]="
+qemu-full
+libvirt
+edk2-ovmf
 virt-manager
 virt-viewer
 swtpm
 iptables-nft
 dnsmasq
-)
-
-jj
+"
 

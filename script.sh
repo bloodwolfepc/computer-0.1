@@ -5,7 +5,7 @@ host="$HOME/computer-0.1"
 #dotfiles="$host/dotfiles"
 pkg="$host/packages"
 faillog="$HOME/.custom/faillog.txt"
-#source "$host/pkglist.sh"
+source "$host/pkglist.sh"
 
 baseprofiles=( #dotfile_array
     "$HOME/.config/nvim/init.lua"
@@ -120,106 +120,90 @@ else
 fi
 }
 
-
-
-
-
-run-download-script() {
-sudo -v
-        echo -n "are you sure you want to migrate dotfiles? This will overwrite existing dotfiles (Y/N): "
-        read answer
-
-    if [[ "$answer" =~ ^[Yy]$ ]]; then
-        for filepath in "${path_list[@]}"; do 
-            non_home_dir=$(echo "$filepath" | sed "s|$HOME||")
-            filepath_no_base=$(dirname "$filepath")
-            usr="/user"
-                if [[ $filepath == $HOME* ]]; then
-                    echo "copying $dotfiles$usr$non_home_dir to $filepath_no_base"
-                    sudo cp -r "$dotfiles$usr$non_home_dir" "$filepath_no_base"
-                else
-                    echo "copying $dotfiles$non_home_dir to $filepath_no_base"
-                    sudo cp -r "$dotfiles$non_home_dir" "$filepath_no_base"
-                fi
-            echo "-------------"
-        done
-    else
-        echo "migrate dotfiles canceled"
-    fi
-echo "precoess finish"
-sudo -k
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-run-upload-script() {
-sudo -v
-sudo mkdir -p "$dotfiles"
-for filepath in "${path_list[@]}"; do
-    directory=$(dirname "$filepath")
-    base=$(basename "$filepath")
-     #change $HOME to 'user' if $HOME exists in filepath
-    first_two=$(echo "$directory" | awk -F'/' '{print "/" $2 "/" $3}' )
-        if [ "$first_two" = "$HOME" ]; then
-            directory_fixed_name="/$(echo $directory | sed 's|/home/[^/]*|user|')"
-            sudo mkdir -p "$dotfiles$directory_fixed_name"
-            sudo cp -r "$directory/$base" "$dotfiles$directory_fixed_name"
-            echo "copying $directory/$base to $dotfiles$directory_fixed_name"
-        else
-            sudo mkdir -p "$dotfiles$directory"
-            sudo cp -r "$directory/$base" "$dotfiles$directory"
-            echo "copying $directory/$base to $dotfiles$directory"
-        fi
-echo "-------------"
-done
-echo "process finish"
-sudo -k
-}
-
-run-download-script() {
-sudo -v
-        echo -n "are you sure you want to migrate dotfiles? This will overwrite existing dotfiles (Y/N): "
-        read answer
-
-    if [[ "$answer" =~ ^[Yy]$ ]]; then
-        for filepath in "${path_list[@]}"; do 
-            non_home_dir=$(echo "$filepath" | sed "s|$HOME||")
-            filepath_no_base=$(dirname "$filepath")
-            usr="/user"
-                if [[ $filepath == $HOME* ]]; then
-                    echo "copying $dotfiles$usr$non_home_dir to $filepath_no_base"
-                    sudo cp -r "$dotfiles$usr$non_home_dir" "$filepath_no_base"
-                else
-                    echo "copying $dotfiles$non_home_dir to $filepath_no_base"
-                    sudo cp -r "$dotfiles$non_home_dir" "$filepath_no_base"
-                fi
-            echo "-------------"
-        done
-    else
-        echo "migrate dotfiles canceled"
-    fi
-echo "precoess finish"
-sudo -k
-}
 #first_one=$(echo "$directory" | awk -F'/' '{print "/" $2}')
+
+pkginst() {
+    pkg_style=$1
+    key=$2
+
+if [ -v "$pkg_style" ]; then
+    if [ -n "${!pkg_style[$key]}" ]; then
+        IFS=' ' read -ra packagelist <<< "$(eval echo \"\${$pkg_style[$key]}\")"
+        case "$pkg_style" in
+            "pac")
+                for package in "${packagelist[@]}"; do 
+                    if [ -n "$package" ]; then
+                        sudo pacman -S --needed --noconfirm "$package" || echo "pac package not found: $package" >> $faillog
+                    fi 
+                done 
+                ;;
+
+            "aur")
+                for package in "${packagelist[@]}"; do 
+                    if [ -n "$package" ]; then 
+                        yay -S --needed --noconfirm "$package" || echo "aur package not found: $package" >> $faillog
+                    fi 
+                done 
+                ;;
+
+            *)
+                echo "package manager unrecognized: $manager" >> $faillog
+                ;;
+        esac
+    else 
+            echo "packagelist not found: $packagelist" >> $faillog
+    fi
+fi
+
+
+
+
+
+
+
+
+    local manager="$1"
+    local packagelist="$2"
+    if [ -f "$packagelist" ]; then
+        case "$manager" in 
+            "pac")
+                for package in "$packagelist"; do 
+                    if [ -n "$package" ]; then
+                        sudo pacman -S --needed --noconfirm "$package" || echo "pac package not found: $package" >> $faillog
+                    fi 
+                done <"$packagelist"
+                ;;
+            "aur")
+                while IFS= read -r package; do 
+                    if [ -n "$package" ]; then 
+                        yay -S --needed --noconfirm "$package" || echo "aur package not found: $package" >> $faillog
+                    fi 
+                done < "$packagelist"
+                ;;
+            *)
+                echo "package manager unrecognized: $manager" >> $faillog
+                ;;
+        esac
+    else 
+            echo "packagelist not found: $packagelist" >> $faillog
+    fi 
+}
+
+
+
+
+
+
+
+
+
+
+
 
 install-packages() { 
     mkdir -p $HOME/.custom
     local manager="$1"
-    local packagelist="$2"]
+    local packagelist="$2"
     if [ -f "$packagelist" ]; then
         case "$manager" in 
             "pac")
