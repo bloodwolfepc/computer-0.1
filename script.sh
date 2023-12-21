@@ -3,7 +3,7 @@
 host="$HOME/computer-0.1"
 #host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 #dotfiles="$host/dotfiles"
-faillog="$HOME/faillog.txt"
+faillog="$HOME/.faillog.txt"
 source "$host/pkglist.sh"
 
 baseprofiles=( #dotfile_array
@@ -123,13 +123,9 @@ fi
 #first_one=$(echo "$directory" | awk -F'/' '{print "/" $2}')
 
 pkginst() {
-    sudo -v
-    local manager="$1"
-    local pkglist="$2"
-
-#eval "specified_manager=(${manager}[@])"
-#eval "specified_pkglist=(${pkglist}[@])"
-#eval "specified_manager=(\$${manager}[@])"
+sudo -v
+local manager="$1"
+local pkglist="$2"
 eval "specified_pkglist=(\$${pkglist}[@])"
 
 
@@ -149,6 +145,13 @@ eval "specified_pkglist=(\$${pkglist}[@])"
                     fi 
                 done
                 ;;
+            "flat")
+                    for package in "${specified_pkglist[@]}"; do
+                        if [ -n "$package" ]; then
+                            #flatpack spec
+                        fi
+                    done
+                ;;
             *)
                 echo "package manager unrecognized: $manager" >> $faillog
                 ;;
@@ -156,37 +159,8 @@ eval "specified_pkglist=(\$${pkglist}[@])"
     else 
             echo "packagelist not found: $packagelist" >> $faillog
     fi
+sudo -k
 }
-
-install-packages() { 
-    mkdir -p $HOME/.custom
-    local manager="$1"
-    local packagelist="$2"
-    if [ -f "$packagelist" ]; then
-        case "$manager" in 
-            "pac")
-                while IFS= read -r package; do 
-                    if [ -n "$package" ]; then
-                        sudo pacman -S --needed --noconfirm "$package" || echo "pac package not found: $package" >> $faillog
-                    fi 
-                done <"$packagelist"
-                ;;
-            "aur")
-                while IFS= read -r package; do 
-                    if [ -n "$package" ]; then 
-                        yay -S --needed --noconfirm "$package" || echo "aur package not found: $package" >> $faillog
-                    fi 
-                done < "$packagelist"
-                ;;
-            *)
-                echo "package manager unrecognized: $manager" >> $faillog
-                ;;
-        esac
-    else 
-            echo "packagelist not found: $packagelist" >> $faillog
-    fi 
-}
-
 
 enable-services() {
 sudo systemctl start sshd.service
@@ -203,14 +177,15 @@ sudo chmod -R u+rwX $HOME
 sudo chown -R $USER:$USER $HOME
 }
 
-install-laptop-specifics() {
+: 'install-laptop-specifics() { #dont use it
 git clone https://github.com/AdnanHodzic/auto-cpufreq.git
 cd auto-cpufreq && sudo ./auto-cpufreq-installer
 sudo auto-cpufreq --install
 cd ..
 }
+'
 
-use-zsh() {
+switch-to-zsh() {
 chsh -l 
 chsh -s /bin/zsh
 sudo mkdir -p ~/.zshhplug
@@ -219,12 +194,14 @@ echo "for adding plugins for zsh run 'install-git-packages'"
 
 
 install-git-packages() {
+#zsh plugin
 mkdir -p ~/.zshplug
 cd ~/.zshplug
 git clone https://github.com/zsh-users/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-history-substring-search
 git clone https://github.com/fdw/ranger-autojump
+#ranger plugins
 mkdir -p ~/.config/ranger
 mkdir -p ~/.config/ranger/plugins
 cd ~/.config/ranger/plugins
@@ -232,8 +209,9 @@ git clone https://github.com/alexanderjeurissen/ranger_devicons
 git clone https://github.com/maximtrp/ranger-archives.git
 git clone https://github.com/fdw/ranger-autojump
 git clone https://github.com/MuXiu1997/ranger-fzf-filter
-
+#zsh/ranger
 cp ~/.config/ranger/plugins/ranger-autojump/autojump.py ~/.config/ranger/plugins/
+#TODO:add the one reaper
 } 
 
 install-discord-screenaudio() {
@@ -253,10 +231,11 @@ install-yay() {
     rm -rf yay
 }
 
-install-bottles() {
+install-flathub() {
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install bottles
 }
+
+: ' #probably not going to bother
 install-ableton() {
         #installer zip must be downloaded inside of ~/Downloads
 
@@ -264,7 +243,7 @@ install-ableton() {
         cp $host/dotfiles/ableton/ableton.desktop $HOME/.local/share/applications/ableton.desktop
         update-desktop-database $HOME/.local/share/applications/
 }
-
+'
 amdvlk-remove() {
 sudo pacman -R amdvlk lib32-amdvlk --noconfirm
 }

@@ -1,86 +1,98 @@
-#packagelist
+#packagelist#
 
-pacman=(
-zsh
-zsh-completions
-sway
-xorg-xwayland
-ranger
-git
-neovim
-kitty
-rofi
-vim
-firefox
-steam
-#discord
-krita
-gimp
-wine
+#would prefer the use keys which would indicate the package type for each array and have arrays listed in those keys, but this seems should be fine
+
+
+pacpkg=(
+#PC UTILS
+gnu-netcat
 gamemode
-fzf
-tree
-neofetch
-waybar
-#obs-studio
-mpv
-vulkan-tools
+git
+wine
+wine-staging
 gtk4
-cliphist
-grim
-slurp
-zathura
-zathura-pdf-poppler
-swayimg
-xdg-desktop-portal
-xdg-desktop-portal-wlr
-p7zip
-ydotool
-freerdp
-htop
-btop
-ctags
-nodejs
-npm
-clang
-khal
-w3m
-ffmpegthumbnailer
-yt-dlp
-ffmpeg
+qt5-webengine
+vulkan-tools
 flatpak
 flatpak-builder
+unison
 cups
-cmake
-qt5-webengine
-gnu-getcat
-gamescope
-acpi
-swaybg
-wl-mirror
+exfat-utils
+pass
+android-file-transfer
 hid-tools
-rsync
 lib32-libcanberra
 v4l2loopback
 v4l2loopback-utils
-#qutebrowser
-#pass
-#python-tldextract
-#python-adblock
-wine-staging
-exfat-utils
-android-file-transfer
+xdg-desktop-portal
+xdg-desktop-portal-wlr
+p7zip
+icpi #network piping
+#freerdp #how in the world does this even work?
+npm #for nodejs, idk if this needs to be listed
+ctags
+cmake
+clang
+nodejs
+
+#DISPLAY MANAGER UTILS
+sway
+xorg-xwayland
+rofi
+waybar
+wl-mirror
+swayimg
+cliphist
+grim
+slurp
+flameshot
+swaybg
+swayimg
+ydotool
+gamescope
+
+
+#TERMINAL
+zsh
+zsh-completions
+ranger
+ffmpegthumbnailer
+neovim
+neovim
+kitty
+fzf
+tree
+htop
+btop
+
+#BROWSERS
+firefox
+
+#MISC
+gimp
+krita
+steam
+mpv
+ffmpeg
+zathura
+zathura-pdf-poppler
+#discord #using screenaudio instead
+#obs-studio #using git version
 )
 
 
 
+nvidia_dri=(
+neauveau-git
+#its not really all that good *yet*
+)
 
-amd_drivers=(
+amd_dri=(
 mesa-git
 lib32-mesa-git
 )
 
-audio_drivers=(
+audio_dri=(
 pipewire
 lib32-pipewire
 pipewire-docs
@@ -111,42 +123,48 @@ ttf-font-awesome
 )
 
 aurpkg=(
-wttrbar-git
-wttr
+#PC UTILS
 dotnet-runtime-bin
-browsh
+xdg-desktop-portal-termfilechooser-git
+input-remapper-git
+lxqt-policykit
+bluez-git
+
+#DISPLAY MANAGER UTILS
+wttrbar-git
+hyperpicker-git #still need to bind this
+mpvpaper
+swaync
+
+
+#TERMINAL
+wttr
+autojump
+cli-visualizer
+
+#MISC
 mangohud
 lib32-mangohud
 goverlay
 vkbassalt
-hyperpicker-git
-xdg-desktop-portal-termfilechooser-git
-input-remapper-git
-#polkit-dumb-agent-git #depreciated for lxqt-policykit
-lxqt-policykit
 easyrpg-player
-grapejuice-git
 #showmethekeys
-flameshot-git
-visual-studio-code-bin
+#visual-studio-code-bin
 protonup-qt
-bottles
-gcalcli
 godot-git
-#yewtube-git
-grapejuice-git
-mpvpaper
-swaync
-lib32-gperftools
-bluez-git
+grapejuice-git #hopefully they finally fix this on wayland
 vrrtest-git
-cli-visualizer
-autojump
 ryujinx
+lib32-gperftools
 )
 
+pro_audio=(
+pro-audio 
+#sometimes has disceprencies, prefer to manage on its own
+)
 
 flat=(
+bottles
 de.shorsh.discord-screenaudio
 )
 
@@ -165,4 +183,8 @@ virtulatization_aur=(
 looking-glass
 )
 
-#android-file-transfer
+
+
+
+
+

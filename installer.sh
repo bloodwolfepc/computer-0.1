@@ -6,41 +6,34 @@ pkg="$host/packages"
 faillog="$HOME/.custom/faillog.txt"
 source "$host/script.sh"
 
-run-installer-one() {
-        sudo -v
-        install-packages pac $pkg/audio-drivers
-        install-packages pac $pkg/amd-drivers
-        install-packages pac $pkg/pacman
-        install-yay
-        install-packages aur $pkg/aur
-        install-packages pac $pkg/fonts
-        install-packages aur $pkg/fonts-aur
-        #install-laptop-specifics
-        use-zsh
-        install-git-packages
-        install-discord-screenaudio
-        enable-services
-        home-permissions
-        migrate-dotfiles #add noconfirm todo
-        sudo -k
-}
-run-installer-two() {
-        sudo -v
-        install-bottles
-        #install-ableton #not yet working
-        install-packages pac emulators
-        install-packages aur emulators-aur
-        install-packages pac virtualization
-        sudo -k
+run-base-installation() {
+sudo -v
+pkginst pac audio_dri
+pkginst pac amd_dri
+pkginst pac pacpkg
+install-yay
+pkginst aur aurpkg
+pkginst pac fonts
+pkginst aur fonts_aur
+
+switch-to-zsh
+install-git-packages
+enable-system-services
+home-permissions
+install-flathub
+
+profile load baseprofiles
+profile load sparkle
+sudo -k
 }
 
-
-
-
-
-
-
-run-installer() {
+run-continued-installation() {
+sudo -v
+pkginst aur aurpkg
+pkginst pac virtualization
+pkginst aur virtualization_aur
+sudo -k
+}
 
 echo "welcome to the installer script hello"
 sleep 7
@@ -96,6 +89,4 @@ echo "please type your answer (i.e 1)"
         else
                 read answer
         fi
-
-}
 
