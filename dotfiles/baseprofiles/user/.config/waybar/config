@@ -119,7 +119,7 @@
     "format": "{}°C",
     "tooltip": true,
     "interval": 3600,
-    "exec": "wttrbar --location Minneapolis",
+    "exec": "wttrbar",
     "return-type": "json"
 },
 

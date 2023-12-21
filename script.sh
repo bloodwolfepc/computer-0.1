@@ -214,7 +214,7 @@ cp ~/.config/ranger/plugins/ranger-autojump/autojump.py ~/.config/ranger/plugins
 #TODO:add the one reaper
 } 
 
-:'
+: '
 install-discord-screenaudio() {
     cd $HOME
     git clone https://github.com/maltejur/discord-screenaudio.git

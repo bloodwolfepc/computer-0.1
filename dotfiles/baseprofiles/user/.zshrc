@@ -9,7 +9,7 @@ source $HOME/.ip.sh
 source $HOME/.custom/pipewire.sh
 source $HOME/.custom/commands.sh
 source $HOME/computer-0.1/script.sh
-source $HOME/computer-0.1/installer.sh
+#source $HOME/computer-0.1/installer.sh #oops, dont do that
 [[ -s /etc/profile.d/autojump.zsh ]] && source /etc/profile.d/autojump.zsh
 export VISUAL=nvim
 #export LD_PRELOAD=/usr/lib/modules/6.5.9-zen2-1-zen/updates/dkms/v4l2loopback.ko.zst
