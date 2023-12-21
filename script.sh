@@ -3,8 +3,7 @@
 host="$HOME/computer-0.1"
 #host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 #dotfiles="$host/dotfiles"
-pkg="$host/packages"
-faillog="$HOME/.custom/faillog.txt"
+faillog="$HOME/faillog.txt"
 source "$host/pkglist.sh"
 
 baseprofiles=( #dotfile_array
@@ -93,6 +92,7 @@ sudo -k
 #else
 elif [ "$function" = "load" ]; then
     sudo -v
+        #todo: depreciate awful confirmation script
         echo -n "are you sure you want to migrate dotfiles? This will overwrite existing dotfiles (Y/N): "
         read answer
 
@@ -123,29 +123,32 @@ fi
 #first_one=$(echo "$directory" | awk -F'/' '{print "/" $2}')
 
 pkginst() {
-    pkg_style=$1
-    key=$2
+    sudo -v
+    local manager="$1"
+    local pkglist="$2"
 
-if [ -v "$pkg_style" ]; then
-    if [ -n "${!pkg_style[$key]}" ]; then
-        IFS=' ' read -ra packagelist <<< "$(eval echo \"\${$pkg_style[$key]}\")"
-        case "$pkg_style" in
+#eval "specified_manager=(${manager}[@])"
+#eval "specified_pkglist=(${pkglist}[@])"
+#eval "specified_manager=(\$${manager}[@])"
+eval "specified_pkglist=(\$${pkglist}[@])"
+
+
+    if [ "${#specified_pkglist[@]}" -gt 0 ]; then
+        case "$manager" in 
             "pac")
-                for package in "${packagelist[@]}"; do 
+                for package in "${specified_pkglist[@]}"; do 
                     if [ -n "$package" ]; then
                         sudo pacman -S --needed --noconfirm "$package" || echo "pac package not found: $package" >> $faillog
                     fi 
                 done 
                 ;;
-
             "aur")
-                for package in "${packagelist[@]}"; do 
+                for package in "${specified_pkglist[@]}"; do 
                     if [ -n "$package" ]; then 
                         yay -S --needed --noconfirm "$package" || echo "aur package not found: $package" >> $faillog
                     fi 
-                done 
+                done
                 ;;
-
             *)
                 echo "package manager unrecognized: $manager" >> $faillog
                 ;;
@@ -153,52 +156,7 @@ if [ -v "$pkg_style" ]; then
     else 
             echo "packagelist not found: $packagelist" >> $faillog
     fi
-fi
-
-
-
-
-
-
-
-
-    local manager="$1"
-    local packagelist="$2"
-    if [ -f "$packagelist" ]; then
-        case "$manager" in 
-            "pac")
-                for package in "$packagelist"; do 
-                    if [ -n "$package" ]; then
-                        sudo pacman -S --needed --noconfirm "$package" || echo "pac package not found: $package" >> $faillog
-                    fi 
-                done <"$packagelist"
-                ;;
-            "aur")
-                while IFS= read -r package; do 
-                    if [ -n "$package" ]; then 
-                        yay -S --needed --noconfirm "$package" || echo "aur package not found: $package" >> $faillog
-                    fi 
-                done < "$packagelist"
-                ;;
-            *)
-                echo "package manager unrecognized: $manager" >> $faillog
-                ;;
-        esac
-    else 
-            echo "packagelist not found: $packagelist" >> $faillog
-    fi 
 }
-
-
-
-
-
-
-
-
-
-
-
 
 install-packages() { 
     mkdir -p $HOME/.custom
