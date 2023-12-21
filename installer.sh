@@ -15,7 +15,7 @@ install-yay
 pkginst aur aurpkg
 pkginst pac fonts
 pkginst aur fonts_aur
-
+amdvlk-remove
 switch-to-zsh
 install-git-packages
 enable-system-services
@@ -24,6 +24,7 @@ install-flathub
 
 profile load baseprofiles
 profile load sparkle
+
 sudo -k
 }
 
