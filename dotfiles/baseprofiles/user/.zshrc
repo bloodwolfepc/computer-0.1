@@ -5,7 +5,7 @@
 #export XDG_SESSION_DESKTOP=sway
 
 
-source $HOME/.ip.sh
+source $HOME/.var.sh
 source $HOME/.custom/pipewire.sh
 source $HOME/.custom/commands.sh
 source $HOME/computer-0.1/script.sh

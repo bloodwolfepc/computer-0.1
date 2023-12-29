@@ -10,6 +10,8 @@
 #echo "/tmp/cover.jpeg"
 #
 album_art=$(playerctl -p firefox metadata mpris:artUrl)
+album_art=$(playerctl -p spotify metadata mpris:artUrl)
+
 #album_art=$(playerctl metadata mpris:artUrl)
 if [[ -z $album_art ]]
 then
@@ -18,5 +20,4 @@ then
 fi
 curl -s  "${album_art}" --output "/tmp/cover.jpeg"
 echo "/tmp/cover.jpeg"
-
 

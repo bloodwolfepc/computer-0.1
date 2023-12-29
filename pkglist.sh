@@ -38,8 +38,11 @@ nodejs
 #DISPLAY MANAGER UTILS
 sway
 xorg-xwayland
+xorg-xwininfo
+weston
 rofi
 waybar
+waynvc
 wl-mirror
 swayimg
 cliphist
@@ -152,9 +155,9 @@ easyrpg-player
 #visual-studio-code-bin
 protonup-qt
 godot-git
-grapejuice-git #hopefully they finally fix this on wayland
+#grapejuice-git #hopefully they finally fix this on wayland #trying flatpak
 vrrtest-git
-ryujinx
+ryujinx-bin
 lib32-gperftools
 )
 
@@ -163,10 +166,11 @@ pro-audio
 #sometimes has disceprencies, prefer to manage on its own
 )
 
-flat=(
-bottles
-de.shorsh.discord-screenaudio
-)
+#flat=(
+#bottles
+#de.shorsh.discord-screenaudio
+#grapejuice
+#)
 
 virtualization=(
 qemu-full
@@ -181,6 +185,12 @@ dnsmasq
 
 virtulatization_aur=(
 looking-glass
+)
+
+xorg=(
+xfxe4
+xfce4-goodies
+xorg
 )
 
 

@@ -1,4 +1,4 @@
-output * bg /home/bloodwolfe/.wallpapers/3840x2160-black-solid-color-background.jpg fill
+output * bg /home/bloodwolfe/.custom/wallpapers/3840x2160-black-solid-color-background.jpg fill
 
 default_border none
 gaps inner 5

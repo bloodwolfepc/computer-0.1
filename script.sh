@@ -33,7 +33,7 @@ baseprofiles=( #dotfile_array
     "$HOME/.zshrc"
     "$HOME/.zprofile"
     "$HOME/.zshenv"
-    "$HOME/.wallpapers"
+    #"$HOME/.wallpapers"
     "/usr/share/icons/Qogir-Recolored-Dracula-Purple"
     #"/usr/share/icons/"
     "$HOME/.config/qutebrowser/config.py"
@@ -250,4 +250,6 @@ amdvlk-remove() {
 sudo pacman -R amdvlk lib32-amdvlk --noconfirm
 }
 
-
+utilize-var-sh() {
+echo "#testinput" >> $HOME/.var.sh
+}

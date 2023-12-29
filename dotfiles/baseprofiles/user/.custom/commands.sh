@@ -224,32 +224,42 @@ sync() {
 #laptop powersave
 
 
-ltpowersave() {
 
+setcoresoff() {
 sudo -v
-for i in $(seq 4 $(nproc)); do
-  sudo bash -c "echo 0 > /sys/devices/system/cpu/cpu$i/online"
+mod1 /sys/devices/system/cpu/*
+mod2 /sys/devices/system/cpu/*
+for x in /sys/devices/system/cpu/cpu{4..$1}*/online; do
+  echo 0 > "$x"
+  echo "power off core $x"
 done
-echo "cpu cores limited to 4"
+sudo -k
+}
+setcoreson() {
+sudo -v
+mod1 /sys/devices/system/cpu/*
+mod2 /sys/devices/system/cpu/*
+for x in /sys/devices/system/cpu/cpu{4..$1}*/online; do
+  echo 1 > "$x"
+  echo "power restored core $x"
+done
+sudo -k
+}
+ltpowersave() {
+setcoresoff 15
+#change this to register a default value if there is no input
 swaymsg output eDP-2 resolution 2560x1600@60Hz
 sleep 1
 swaymsg reload
 sleep 1
 sudo cpupower frequency-set -g powersave
-setbr 40
-sudo -k
+setbr 125
 }
 
+
+
 ltpowerhigh() {
-sudo -v
-mod1 /sys/devices/system/cpu/*
-mod2 /sys/devices/system/cpu/*
-
-for x in /sys/devices/system/cpu/cpu{4..15}*/online; do
-  echo 1 > "$x"
-  echo "power restored core $x"
-done
-
+setcoreson 15
 swaymsg output eDP-2 resolution 2560x1600@120Hz
 echo "120Hz enabled"
 sleep 1
@@ -257,7 +267,6 @@ swaymsg reload
 sleep 1
 sudo cpupower frequency-set -g performance
 setbr 255
-sudo -k
 }
 
 syncconf() {

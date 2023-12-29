@@ -16,6 +16,7 @@ pkginst aur aurpkg
 pkginst pac fonts
 pkginst aur fonts_aur
 amdvlk-remove
+utilize-var-sh
 switch-to-zsh
 install-git-packages
 enable-system-services
@@ -23,7 +24,7 @@ home-permissions
 install-flathub
 
 profile load baseprofiles
-profile load sparkle
+profile load blackout
 
 sudo -k
 }
@@ -35,7 +36,7 @@ pkginst pac virtualization
 pkginst aur virtualization_aur
 sudo -k
 }
-
+: '
 echo "welcome to the installer script hello"
 sleep 7
 echo "please select installer option..."
@@ -82,7 +83,7 @@ echo "please type your answer (i.e 1)"
                 sleep 10
                 run-installer-two
                 sleep 3
-                echo "you installer part two has finished it's process, thank you for installing!"
+                echo "you installer part two has finished its process, thank you for installing!"
         fi
         if [[ "$answer" =~ ^[exit]$ ]]; then
                 sleep 4
@@ -90,4 +91,4 @@ echo "please type your answer (i.e 1)"
         else
                 read answer
         fi
-
+'
