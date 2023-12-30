@@ -100,7 +100,7 @@ elif [ "$function" = "load" ]; then
     if [[ "$answer" =~ ^[Yy]$ ]]; then
         for filepath in  "${specified_array[@]}"; do
             non_home_dir=$(echo "$filepath" | sed "s|$HOME||")
-            filepath_no_base=$(dirname "$filepath"/)
+            filepath_no_base=$(dirname "$filepath")/
             usr="/user"
             profilename="/$profile_name"
                 if [[ $filepath == $HOME* ]]; then
