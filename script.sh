@@ -105,8 +105,10 @@ elif [ "$function" = "load" ]; then
             profilename="/$profile_name"
                 if [[ $filepath == $HOME* ]]; then
                     echo "copying $dotfiles$profilename$usr$non_home_dir to $filepath_no_base"
+                    mkdir -p "$filepath_no_base"
                     sudo cp -r "$dotfiles$profilename$usr$non_home_dir" "$filepath_no_base"
                 else
+                    mkdir -p "$filepath_no_base"
                     echo "copying $dotfiles$profilename$non_home_dir to $filepath_no_base"
                     sudo cp -r "$dotfiles$profilename$non_home_dir" "$filepath_no_base"
                 fi
