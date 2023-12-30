@@ -146,11 +146,11 @@ eval "specified_pkglist=(\$${pkglist}[@])"
                 done
                 ;;
             "flat")
-                    for package in "${specified_pkglist[@]}"; do
-                        if [ -n "$package" ]; then
-                            #flatpack spec
-                        fi
-                    done
+                for package in "${specified_pkglist[@]}"; do
+                    if [ -n "$package" ]; then
+                        echo "flatpak is wip"
+                    fi
+                done
                 ;;
             *)
                 echo "package manager unrecognized: $manager" >> $faillog
