@@ -14,7 +14,15 @@ brightness="/sys/class/backlight/amdgpu_bl2/brightness"
 #lbip1=$(cat "$HOME/.ip/lbip1")
 #lbip2=$(cat "$HOME/.ip/lbip2")
 
-
+xdgconf() {
+	nv ~/.config/xdg-desktop-portal/portals.conf
+}
+westonconf() {
+	sudo nvim ~/.config/weston.ini
+}
+fstabconf() {
+	sudo nvim /etc/fstab
+}
 
 gsdtlo() {
 	wl-copy "gamemoderun mangohud gamescope -e -f -W 1920 -H 1080 -r 144 %command%"
@@ -58,9 +66,7 @@ comconf() {
 
 
 qssh() {
-	sshhost_file="$HOME/.hostip"
-	sshhost=$(cat "$sshhost_file")
-	ssh $sshhost
+	ssh $hostip
 }
 udd() {
 	update-desktop-database ~/.local/share/applications/

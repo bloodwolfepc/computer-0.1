@@ -2,19 +2,18 @@
 
 #would prefer the use keys which would indicate the package type for each array and have arrays listed in those keys, but this seems should be fine
 
-
+#pacpkg-minimal
+#aurpkg-minimal
 pacpkg=(
 #PC UTILS
 gnu-netcat
 gamemode
 git
-wine
 wine-staging
 gtk4
 qt5-webengine
 vulkan-tools
 flatpak
-flatpak-builder
 unison
 cups
 exfat-utils
@@ -26,9 +25,9 @@ v4l2loopback
 v4l2loopback-utils
 xdg-desktop-portal
 xdg-desktop-portal-wlr
+xdg-desktop-portal-gtk
 p7zip
 icpi #network piping
-#freerdp #how in the world does this even work?
 npm #for nodejs, idk if this needs to be listed
 ctags
 cmake
@@ -72,6 +71,7 @@ btop
 firefox
 
 #MISC
+spotify-launcher
 gimp
 krita
 steam
@@ -101,6 +101,7 @@ lib32-pipewire
 pipewire-docs
 wireplumber
 qpwgraph
+pavucontrol
 pipewire-alsa
 pipewire-jack
 pipewire-zeroconf
@@ -116,19 +117,19 @@ noto-fonts-emoji
 noto-fonts
 noto-fonts-emoji
 noto-fonts-extra
-ttf-sourcecodepro
+ttf-sourcecodepro-nerd
 )
 
 fonts_aur=(
 ttf-monaco
-adobe-source-has-fonts
+adobe-source-han-fonts
 ttf-font-awesome
 )
 
 aurpkg=(
 #PC UTILS
 dotnet-runtime-bin #FOREVER
-xdg-desktop-portal-termfilechooser-git
+xdg-desktop-portal-termfilechooser-git#this getts skipped somehow
 input-remapper-git
 lxqt-policykit
 bluez-git
@@ -159,6 +160,8 @@ godot-git #FOREVER
 vrrtest-git
 ryujinx-bin
 lib32-gperftools
+remoteplaywhatever-bin
+bottles-git
 )
 
 pro_audio=(
@@ -166,11 +169,12 @@ pro-audio
 #sometimes has disceprencies, prefer to manage on its own
 )
 
-#flat=(
-#bottles
-#de.shorsh.discord-screenaudio
-#grapejuice
-#)
+flat=(
+org.flatpak.Builder
+#com.usebottles.bottles
+de.shorsh.discord-screenaudio
+net.brinkervii.grapejuice
+)
 
 virtualization=(
 qemu-full

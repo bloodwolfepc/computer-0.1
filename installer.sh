@@ -9,6 +9,7 @@ source "$host/script.sh"
 #bug where bash cant run installs but zsh can, either fix it for base or ulilize zsh early
 run-base-installation() {
 sudo -v
+use-zsh
 pkginst pac audio_dri
 install-yay
 pkginst aur amd_dri
@@ -18,7 +19,6 @@ pkginst pac fonts
 pkginst aur fonts_aur
 amdvlk-remove
 utilize-var-sh
-switch-to-zsh
 install-git-packages
 enable-system-services
 home-permissions

@@ -55,7 +55,9 @@ for_window [app_id="one.alynx.showmethekey" title="Floating Window - Show Me The
 #floating kitty
 bindsym $mod+t exec $HOME/.custom/floatingkitty.sh
 for_window [title="floatingkitty"] floating enable, border pixel 1, client.focused #ffffff #000000 #ffffff #000000 #ffffff, resize set width 20ppt height 40ppt, move position 79ppt 59ppt
-
+for_window [title="Weston"] fullscreen
+for_window [title="GNU Image Manipulation Program"] fullscreen
+#for_window [title="Ableton Live 11 Suite"] fullscreen
 
 #, resize shrink height 55ppt, move position width 100px, client.focused #ffffff #000000 #ffffff #000000 #ffffff
 

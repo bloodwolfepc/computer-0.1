@@ -41,6 +41,7 @@ baseprofiles=( #dotfile_array
     "$HOME/.config/qutebrowser/quickmarks"
     "$HOME/.config/qutebrowser/greasemonkey"
     "$HOME/.config/mpv/mpv.conf"
+    "$HOME/.config/xdg-desktop-portal/portals.conf"
 )
 
 sparkle=(
@@ -151,7 +152,7 @@ eval "specified_pkglist=(\$${pkglist}[@])" #this causes some sort of discrepency
             "flat")
                 for package in "${specified_pkglist[@]}"; do
                     if [ -n "$package" ]; then
-                        echo "flatpak is wip"
+                        flatpak install --if-not-exists flathub "$package"
                     fi
                 done
                 ;;
@@ -166,6 +167,7 @@ sudo -k
 }
 
 enable-services() {
+#looks like this uses gui polkit, need to think of a fix for it
 sudo systemctl start sshd.service
 sudo systemctl enable sshd.service
 
@@ -188,12 +190,12 @@ cd ..
 }
 '
 
-switch-to-zsh() {
+use-zsh() {
 sudo -v
 sudo pacman -S zsh --needed -noconfirm
 chsh -l 
 chsh -s /bin/zsh
-sudo mkdir -p ~/.zshhplug
+sudo mkdir -p ~/.zshplug
 echo "for adding plugins for zsh run 'install-git-packages'"
 sudo -k
 }
@@ -252,10 +254,11 @@ install-ableton() {
         update-desktop-database $HOME/.local/share/applications/
 }
 '
-amdvlk-remove() {
+remove-amdvlk() {
 sudo pacman -R amdvlk lib32-amdvlk --noconfirm
 }
 
 utilize-var-sh() {
 echo "#testinput" >> $HOME/.var.sh
 }
+
