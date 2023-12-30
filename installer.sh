@@ -6,12 +6,13 @@ pkg="$host/packages"
 faillog="$HOME/.custom/faillog.txt"
 source "$host/script.sh"
 
+#bug where bash cant run installs but zsh can, either fix it for base or ulilize zsh early
 run-base-installation() {
 sudo -v
 pkginst pac audio_dri
-pkginst pac amd_dri
-pkginst pac pacpkg
 install-yay
+pkginst aur amd_dri
+pkginst pac pacpkg
 pkginst aur aurpkg
 pkginst pac fonts
 pkginst aur fonts_aur

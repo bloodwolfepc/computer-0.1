@@ -127,7 +127,7 @@ ttf-font-awesome
 
 aurpkg=(
 #PC UTILS
-dotnet-runtime-bin
+dotnet-runtime-bin #FOREVER
 xdg-desktop-portal-termfilechooser-git
 input-remapper-git
 lxqt-policykit
@@ -154,7 +154,7 @@ easyrpg-player
 #showmethekeys
 #visual-studio-code-bin
 protonup-qt
-godot-git
+godot-git #FOREVER
 #grapejuice-git #hopefully they finally fix this on wayland #trying flatpak
 vrrtest-git
 ryujinx-bin

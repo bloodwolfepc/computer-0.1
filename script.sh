@@ -1,6 +1,7 @@
 #!/bin/bash
 
 host="$HOME/computer-0.1"
+dotfiles="$host/dotfiles"
 #host="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 #dotfiles="$host/dotfiles"
 faillog="$HOME/.faillog.txt"
@@ -126,7 +127,7 @@ pkginst() {
 sudo -v
 local manager="$1"
 local pkglist="$2"
-eval "specified_pkglist=(\$${pkglist}[@])"
+eval "specified_pkglist=(\$${pkglist}[@])" #this causes some sort of discrepency with bash, looking for alternative
 
 
     if [ "${#specified_pkglist[@]}" -gt 0 ]; then
@@ -186,10 +187,13 @@ cd ..
 '
 
 switch-to-zsh() {
+sudo -v
+sudo pacman -S zsh --needed -noconfirm
 chsh -l 
 chsh -s /bin/zsh
 sudo mkdir -p ~/.zshhplug
 echo "for adding plugins for zsh run 'install-git-packages'"
+sudo -k
 }
 
 
