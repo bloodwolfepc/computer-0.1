@@ -13,6 +13,24 @@ brightness="/sys/class/backlight/amdgpu_bl2/brightness"
 #sshhost=$(cat "$sshhost_file")
 #lbip1=$(cat "$HOME/.ip/lbip1")
 #lbip2=$(cat "$HOME/.ip/lbip2")
+cpcustomtobin() {
+	sudo cp -r ~/.custom usr/bin/custom
+}
+sptconf() {
+	nv $HOME/.config/spotify-tui/config.yml
+}
+lyr() {
+	lyricstify start --sync-type balance
+}
+deconf() {
+	cd $depath
+}
+
+reaperspitfire() {
+	export WINEPREFIX=~/.local/share/bottles/bottles/btl3
+	export WINELOADER=~/.local/share/bottles/runners/soda-8.0-2/bin/wine
+	reaper
+}
 
 xdgconf() {
 	nv ~/.config/xdg-desktop-portal/portals.conf

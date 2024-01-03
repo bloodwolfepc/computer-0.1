@@ -6,7 +6,7 @@
     "spacing": 2, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": ["custom/notification", "sway/mode", "sway/scratchpad", "sway/window"],
-    "modules-center": ["image#album-art", "custom/media"],
+    "modules-center": ["image#album-art","custom/media", "custom/lyrics"],
     "modules-right": ["mpd", "custom#vpn", "pulseaudio", "network", "cpu", "memory", "custom/weather", "battery", "battery#bat2","clock#date", "clock", "tray"],
     // Modules configuration
     // "sway/workspaces": {
@@ -50,6 +50,12 @@
      "size": 18,
      "interval": 5,  
 },
+"custom/lyrics": {
+	"format": "{}",
+	"interval": 1,
+	"exec": "$HOME/.custom/currentlyric.sh",
+},
+
 "custom#vpn": {
     "format": "VPN ",
     "exec": "echo '{\"class\": \"connected\"}'",

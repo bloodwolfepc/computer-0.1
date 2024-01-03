@@ -6,7 +6,7 @@ dotfiles="$host/dotfiles"
 #dotfiles="$host/dotfiles"
 faillog="$HOME/.faillog.txt"
 source "$host/pkglist.sh"
-
+cfg="$HOME/.config"
 baseprofiles=( #dotfile_array
     "$HOME/.config/nvim/init.lua"
     "$HOME/.config/sway/config"
@@ -42,6 +42,15 @@ baseprofiles=( #dotfile_array
     "$HOME/.config/qutebrowser/greasemonkey"
     "$HOME/.config/mpv/mpv.conf"
     "$HOME/.config/xdg-desktop-portal/portals.conf"
+    "$HOME/.asoundrc"
+    "$cfg/spotify-tui/config.yml"
+
+)
+
+depath="/usr/share/applications"
+de=(
+    "$depath/cockos-reaper.desktop"
+    "$depath/climp.desktop"
 )
 
 sparkle=(
@@ -168,13 +177,27 @@ sudo -k
 
 enable-services() {
 #looks like this uses gui polkit, need to think of a fix for it
-sudo systemctl start sshd.service
 sudo systemctl enable sshd.service
+sudo systemctl start sshd.service
 
-sudo systemctl start bluetooth.service
 sudo systemctl enable bluetooth.service
-#remember ssh commands ssh-keygen and ssh-copy-id
+sudo systemctl start bluetooth.service
+
+sudo systemctl enable cpupower.service
+sudo systemctl start cpupower.service
+
+systemctl --user enable spotifyd.service
+systemctl --user start spotifyd.service
+#set natural state
    echo "services enabled"
+}
+
+setup-vpn() {
+groupadd -r nordvpn
+sudo gpasswd -a $USER nordvpn
+sudo usermod -aG nordvpn $USER
+sudo systemctl enable nordvpnd.service
+sudo systemctl start nordvpnd.service
 }
 
 home-permissions() {
@@ -262,3 +285,6 @@ utilize-var-sh() {
 echo "#testinput" >> $HOME/.var.sh
 }
 
+wineasio-setup() {
+sudo usermod -aG realtime $(whoami)
+}

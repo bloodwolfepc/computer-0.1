@@ -6,6 +6,7 @@ include "monitor-config"
 include "style-config"
 exec systemctl --user import-envionment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec dbus-update-activation-envionment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec "$HOME/.custom/lyricruntime.sh"
 
 # Variables
 set $mod Mod4
@@ -55,8 +56,7 @@ for_window [app_id="one.alynx.showmethekey" title="Floating Window - Show Me The
 #floating kitty
 bindsym $mod+t exec $HOME/.custom/floatingkitty.sh
 for_window [title="floatingkitty"] floating enable, border pixel 1, client.focused #ffffff #000000 #ffffff #000000 #ffffff, resize set width 20ppt height 40ppt, move position 79ppt 59ppt
-for_window [title="Weston"] fullscreen
-for_window [title="GNU Image Manipulation Program"] fullscreen
+
 #for_window [title="Ableton Live 11 Suite"] fullscreen
 
 #, resize shrink height 55ppt, move position width 100px, client.focused #ffffff #000000 #ffffff #000000 #ffffff
@@ -179,14 +179,38 @@ input type:pointer {
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 
-for_window [class="steam"] move container to workspace 12
-for_window [class="steam-runtime-1"] move container to workspace 12
-for_window [instance="steam"] move container to workspace 12
-for_window [instance="steamwebhelper" class="steam"] move container to workspace 12
+#for_window [class="steam"] move container to workspace 12
+#for_window [class="steam-runtime-1"] move container to workspace 12
+#for_window [instance="steam"] move container to workspace 12
+#for_window [instance="steamwebhelper" class="steam"] move container to workspace 12
+#for_window [title="discord-screenaudio"] move container to workspace 6
 
-for_window [class="tidal-hifi"] move container to workspace 11
-for_window [title="discord-screenaudio"] move container to workspace 6
-for_window [title="Reaper Keys"] resize shrink width 55ppt, splitv
+assign [app_id="de.shorsh.discord-screenaudio"] 6
+#assign [class="spotify"] 7
+assign [class="reaper"] 8
+for_window [title="Reaper Keys Feedback"] resize shrink width 55ppt, splitv
+assign [title="Mixer"] 9
+assign [class="steam"] 12
+for_window [title="Friends List"] resize set width 70ppt, splitv
+
+#climp
+assign [app_id="spot"] 7
+for_window [app_id="spot"] move left
+assign [app_id="lyr"] 7
+for_window [app_id="lyr"] move right, splitv, move up, resize set width 25ppt, resize set height 65ppt
+assign [title="imvalbumart"] 7
+for_window [title="imvalbumart"] move right, splitv, move down, resize set width 25ppt
+
+
+
+
+for_window [title="Weston"] fullscreen
+for_window [title="GNU Image Manipulation Program"] fullscreen
+
+#floating enable, resize set width 50ppt height 40ppt, move position 40ppt 2ppt
+
+#move container to workspace 2
+#resize shrink width 55ppt, splitv
 for_window [title="Friends List"] resize shrink width 70ppt, splitv
 ##for_window [title="Rain World"] move container to workspace 7
 

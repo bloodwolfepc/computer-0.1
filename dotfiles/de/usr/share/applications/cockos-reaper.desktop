@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=REAPER
+Comment=REAPER
+Categories=Audio;Video;AudioVideo;AudioVideoEditing;Recorder;
+Exec=/usr/bin/reaper
+Terminal=false
+Icon=cockos-reaper
+MimeType=application/x-reaper-project;application/x-reaper-project-backup;application/x-reaper-theme
+StartupWMClass=REAPER
