@@ -44,6 +44,7 @@ baseprofiles=( #dotfile_array
     "$HOME/.config/xdg-desktop-portal/portals.conf"
     "$HOME/.asoundrc"
     "$cfg/spotify-tui/config.yml"
+    "$cfg/imv/config.ini"
 
 )
 

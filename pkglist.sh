@@ -1,5 +1,8 @@
 #packagelist#
+#obs-studio
 
+
+#openrgb
 #pulsemixer
 #tbe
 #fontforge pac
@@ -221,6 +224,12 @@ xfce4-goodies
 xorg
 )
 
+qutebrowser=(
+qutebrowser
+python-beautifulsoup4
+python-tldextract
+python-adblock
+)
 
 
 
