@@ -1,6 +1,12 @@
 #packagelist#
 #obs-studio
-
+#neomutt
+#       #requires further examination
+#lf
+#       i think i like ranger more
+#
+#keyd
+#evdev
 
 #openrgb
 #pulsemixer
@@ -16,11 +22,13 @@
 #imv
 #
 #lyricstify
-#spotifyd
-#spotify-tui
+#spotifyd #works quite badly right now
+#spotify-tui #no longer worked
 #ncspot #up and coming
 #
 #mixxx #dj
+#
+#nss-mdns
 
 
 #would prefer the use keys which would indicate the package type for each array and have arrays listed in those keys, but this seems should be fine

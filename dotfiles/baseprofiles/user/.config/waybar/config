@@ -46,14 +46,14 @@
     },
 
 "image#album-art": {
-     "exec":"$HOME/.custom/albumart.sh",
+     "exec":"echo /tmp/cover.jpeg",
      "size": 18,
      "interval": 5,  
 },
 "custom/lyrics": {
 	"format": "{}",
 	"interval": 1,
-	"exec": "$HOME/.custom/currentlyric.sh",
+	"exec": "$HOME/.custom/lyrics.sh",
 },
 
 "custom#vpn": {
@@ -125,7 +125,7 @@
     "format": "{}°C",
     "tooltip": true,
     "interval": 3600,
-    "exec": "wttrbar",
+    "exec": "wttrbar --location Minneapolis",
     "return-type": "json"
 },
 

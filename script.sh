@@ -38,13 +38,14 @@ baseprofiles=( #dotfile_array
     "/usr/share/icons/Qogir-Recolored-Dracula-Purple"
     #"/usr/share/icons/"
     "$HOME/.config/qutebrowser/config.py"
-    "$HOME/.config/qutebrowser/quickmarks"
+    #"$HOME/.config/qutebrowser/quickmarks"
     "$HOME/.config/qutebrowser/greasemonkey"
     "$HOME/.config/mpv/mpv.conf"
     "$HOME/.config/xdg-desktop-portal/portals.conf"
     "$HOME/.asoundrc"
     "$cfg/spotify-tui/config.yml"
     "$cfg/imv/config.ini"
+    "/etc/keyd/default.conf" #gotta think of a modding thing for load to here
 
 )
 
@@ -52,6 +53,7 @@ depath="/usr/share/applications"
 de=(
     "$depath/cockos-reaper.desktop"
     "$depath/climp.desktop"
+    "$depath/steam.desktop"
 )
 
 sparkle=(
@@ -66,10 +68,12 @@ blackout=(
 
 #todo add backup and deletion system
 profile() {
-sudo -v
+
+backup_cache="$HOME/.cache"
 function=$1
 profile_name=$2
-eval "specified_array=(\$${profile_name}[@])"
+eval "specified_array=(\$${profile_name})"
+
 destination="$host/dotfiles/$profile_name"
 
 if [ -z "$profile_name" ] || [ ! -v "$profile_name[@]" ]; then
@@ -78,6 +82,7 @@ if [ -z "$profile_name" ] || [ ! -v "$profile_name[@]" ]; then
 fi
 
 if [ "$function" = "save" ]; then
+sudo -v
 sudo mkdir -p "$destination"
 for filepath in "${specified_array[@]}"; do
     directory=$(dirname "$filepath")
@@ -103,12 +108,9 @@ sudo -k
 
 #else
 elif [ "$function" = "load" ]; then
-    sudo -v
-        #todo: depreciate awful confirmation script
-        echo -n "are you sure you want to migrate dotfiles? This will overwrite existing dotfiles (Y/N): "
-        read answer
+       loadbu="$backup_cache/load"
 
-    if [[ "$answer" =~ ^[Yy]$ ]]; then
+    #if [[ "$answer" =~ ^[Yy]$ ]]; then
         for filepath in  "${specified_array[@]}"; do
             non_home_dir=$(echo "$filepath" | sed "s|$HOME||")
             filepath_no_base=$(dirname "$filepath")/
@@ -117,21 +119,21 @@ elif [ "$function" = "load" ]; then
                 if [[ $filepath == $HOME* ]]; then
                     echo "copying $dotfiles$profilename$usr$non_home_dir to $filepath_no_base"
                     mkdir -p "$filepath_no_base"
-                    sudo cp -r "$dotfiles$profilename$usr$non_home_dir" "$filepath_no_base"
+                    mkdir -p "$loadbu"
+                    cp -r "$filepath" "$loadbu"
+                    cp -r "$dotfiles$profilename$usr$non_home_dir" "$filepath_no_base"
                 else
                     mkdir -p "$filepath_no_base"
+                    mkdir -p "$loadbu"
                     echo "copying $dotfiles$profilename$non_home_dir to $filepath_no_base"
-                    sudo cp -r "$dotfiles$profilename$non_home_dir" "$filepath_no_base"
+                    cp -r "$filepath" "$loadbu"
+                    cp -r "$dotfiles$profilename$non_home_dir" "$filepath_no_base"
+
                 fi
             echo "-------------"
         done
-    else echo "canceled"
         echo "process finished"
-        sudo -k
-    fi
-else
-    echo "function not recognised"
-fi
+    fi 
 }
 
 #first_one=$(echo "$directory" | awk -F'/' '{print "/" $2}')
@@ -140,7 +142,12 @@ pkginst() {
 sudo -v
 local manager="$1"
 local pkglist="$2"
-eval "specified_pkglist=(\$${pkglist}[@])" #this causes some sort of discrepency with bash, looking for alternative
+#write for every name of array in pkglist
+#match is with $pkglist
+eval specified_pkglist="$pkglist"[@]
+#bash (\${$pkglist[@]})
+#zsh (\$${pkglist}[@])
+#this causes some sort of discrepency with bash 
 
 
     if [ "${#specified_pkglist[@]}" -gt 0 ]; then
@@ -176,24 +183,21 @@ eval "specified_pkglist=(\$${pkglist}[@])" #this causes some sort of discrepency
 sudo -k
 }
 
-enable-services() {
-#looks like this uses gui polkit, need to think of a fix for it
+enable_services() {
+suod -v
 sudo systemctl enable sshd.service
 sudo systemctl start sshd.service
-
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
-
 sudo systemctl enable cpupower.service
 sudo systemctl start cpupower.service
-
 systemctl --user enable spotifyd.service
 systemctl --user start spotifyd.service
-#set natural state
-   echo "services enabled"
+echo "services enabled"
+sudo -k
 }
 
-setup-vpn() {
+setup_vpn() {
 groupadd -r nordvpn
 sudo gpasswd -a $USER nordvpn
 sudo usermod -aG nordvpn $USER
@@ -201,12 +205,12 @@ sudo systemctl enable nordvpnd.service
 sudo systemctl start nordvpnd.service
 }
 
-home-permissions() {
+home_permissions() {
 sudo chmod -R u+rwX $HOME
 sudo chown -R $USER:$USER $HOME
 }
 
-: 'install-laptop-specifics() { #dont use it
+: 'install_laptop_specifics() { #dont use it
 git clone https://github.com/AdnanHodzic/auto-cpufreq.git
 cd auto-cpufreq && sudo ./auto-cpufreq-installer
 sudo auto-cpufreq --install
@@ -214,7 +218,7 @@ cd ..
 }
 '
 
-use-zsh() {
+use_zsh() {
 sudo -v
 sudo pacman -S zsh --needed -noconfirm
 chsh -l 
@@ -225,7 +229,7 @@ sudo -k
 }
 
 
-install-git-packages() {
+install_git_packages() {
 #zsh plugin
 mkdir -p ~/.zshplug
 cd ~/.zshplug
@@ -257,7 +261,7 @@ install-discord-screenaudio() {
 }
 '
 
-install-yay() {
+install_yay() {
     git clone https://aur.archlinux.org/yay.git
     cd yay
     makepkg -si --noconfirm
@@ -265,7 +269,7 @@ install-yay() {
     rm -rf yay
 }
 
-install-flathub() {
+install_flathub() {
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 }
 
@@ -278,14 +282,18 @@ install-ableton() {
         update-desktop-database $HOME/.local/share/applications/
 }
 '
-remove-amdvlk() {
+remove_amdvlk() {
 sudo pacman -R amdvlk lib32-amdvlk --noconfirm
 }
 
-utilize-var-sh() {
+utilize_var_sh() {
 echo "#testinput" >> $HOME/.var.sh
 }
 
-wineasio-setup() {
+wineasio_setup() {
 sudo usermod -aG realtime $(whoami)
+}
+
+symlink_custom() {
+sudo ln -s $HOME/.custom /usr/local/bin/.custom
 }

@@ -4,7 +4,7 @@
 #export XDG_CURRENT_DESKTOP=sway
 #export XDG_SESSION_DESKTOP=sway
 
-
+#host="$HOME/computer-0.1"
 source $HOME/.var.sh
 source $HOME/.custom/pipewire.sh
 source $HOME/.custom/commands.sh

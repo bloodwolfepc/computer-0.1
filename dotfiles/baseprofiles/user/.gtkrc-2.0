@@ -1,3 +1,7 @@
 
 gtk-icon-theme-name = "Amy-Dark-Icons"
 
+gtk-enable-event-sounds=true
+gtk-enable-input-feedback-sounds=true
+gtk-sound-theme-name = "Default"
+gtk-error-bell = 1

@@ -6,6 +6,17 @@ alias mod1="sudo chmod -R u+rwX"
 alias mod2="sudo chown -R $USER:$USER"
 brightness="/sys/class/backlight/amdgpu_bl2/brightness"
 
+pc() {
+export SDL_VIDEODRIVER=wayland
+export _JAVA_AWT_WM_NONREPARENTING=1
+export QT_QPA_PLATFORM=wayland
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_DESKTOP=sway
+sway
+}
+
+
+
 #ip
 #sshhost_file="$HOME/.hostip"
 
@@ -13,8 +24,23 @@ brightness="/sys/class/backlight/amdgpu_bl2/brightness"
 #sshhost=$(cat "$sshhost_file")
 #lbip1=$(cat "$HOME/.ip/lbip1")
 #lbip2=$(cat "$HOME/.ip/lbip2")
+#
+#
+#
+blackout() {
+	profile load blackout
+	swaymsg reload
+}
+sparkle() {
+	profile load sparkle
+	swaymsg reload
+}
+todo() {
+	nv ~/notebook/todo
+}
+
 cpcustomtobin() {
-	sudo cp -r ~/.custom usr/bin/custom
+	sudo cp -r $HOME/.custom /usr/bin/custom
 }
 sptconf() {
 	nv $HOME/.config/spotify-tui/config.yml
@@ -42,8 +68,8 @@ fstabconf() {
 	sudo nvim /etc/fstab
 }
 
-gsdtlo() {
-	wl-copy "gamemoderun mangohud gamescope -e -f -W 1920 -H 1080 -r 144 %command%"
+lodebug() {
+	wl-copy "gamemoderun mangohud PROTON_LOG=1 > $HOME/debug/proton gamescope -e -f -W 1920 -H 1080 -r 144 %command%"
 	echo "gsdtlo on clipboard"
 }
 

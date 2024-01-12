@@ -1,14 +1,11 @@
-#exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-#exec hash dbus-update-activation-environment 2>/dev/null && \
-     #dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-#:for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
-include "monitor-config"
-include "style-config"
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+#dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec systemctl --user import-envionment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec dbus-update-activation-envionment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-exec "$HOME/.custom/lyricruntime.sh"
+include "monitor-config"
+include "style-config"
 
-# Variables
 set $mod Mod4
 set $left h
 set $down j
@@ -17,13 +14,16 @@ set $right l
 
 set $term kitty
 bindsym $mod+n exec kitty --directory ~/notebook
-#bindsym $mod+b exec kitty -e bluetoothctl
 
-#autostart progs
-#exec steam
-#exec /home/bloodwolfe/discord-screenaudio/build/discord-screenaudio
-#exec_always /bin/custom/steamgamename.sh #works pretty badly tbh
+#temp marks script
+bindsym $mod+2 exec swaymsg "[con_id=__focused__] mark --add m2"
+bindsym $mod+4 exec swaymsg "[con_id=__focused__] mark --toggle m2"
+bindsym $mod+3 exec swaymsg "[con_id=__focused__] swap container with mark m2"
 
+
+
+
+exec "$HOME/.custom/albumart.sh"
 exec ydottoold
 exec swaync
 bindsym $mod+Shift+n exec swaync-client -t -sw
@@ -52,11 +52,15 @@ for_window [app_id="one.alynx.showmethekey" title="Floating Window - Show Me The
 #keyboard bindsyms
 #bindsym $mod+q exec ~/launchoptions.sh
 
-
+set $hollowkitten "kitty --title hollowkitten --class hollowkitten"
+#workaround from having to write individual scripts to nest commands
+assign [class="hollowkitten"] 4
 #floating kitty
 bindsym $mod+t exec $HOME/.custom/floatingkitty.sh
 for_window [title="floatingkitty"] floating enable, border pixel 1, client.focused #ffffff #000000 #ffffff #000000 #ffffff, resize set width 20ppt height 40ppt, move position 79ppt 59ppt
 
+bindsym $mod+shift+1 exec "$HOME/.custom/bind/theme/blackout.sh"
+bindsym $mod+shift+2 exec "$HOME/.custom/sparkle.sh"
 #for_window [title="Ableton Live 11 Suite"] fullscreen
 
 #, resize shrink height 55ppt, move position width 100px, client.focused #ffffff #000000 #ffffff #000000 #ffffff
@@ -176,6 +180,60 @@ input type:pointer {
     bindsym $mod+Shift+0 move container to workspace number 10
     bindsym $mod+Shift+minus move container to workspace number 11
     bindsym $mod+Shift+equal move container to workspace number 12
+
+#could probably make a socket script for this but modesetting instead because its simple
+mode "7b" {
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+g mode "register"
+    bindsym 7 exec "$HOME/.custom/sway/ws19spotify.sh"
+}
+
+mode "register" {
+    #oneshot mode return normal
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+g mode "default"
+
+
+    bindsym $mod+u workspace number 13
+    bindsym $mod+i workspace number 14
+    bindsym $mod+o workspace number 15
+    bindsym $mod+p workspace number 16
+    bindsym $mod+bracketleft workspace number 17
+    bindsym $mod+bracketright workspace number 18
+    bindsym $mod+7 workspace number 19
+    bindsym $mod+8 workspace number 20
+    bindsym $mod+9 workspace number 21
+    bindsym $mod+0 workspace number 22
+    bindsym $mod+minus workspace number 23
+    bindsym $mod+equal workspace number 24
+    # Move focused container to workspace
+    bindsym $mod+Shift+u move container to workspace number 13
+    bindsym $mod+Shift+i move container to workspace number 14
+    bindsym $mod+Shift+o move container to workspace number 15
+    bindsym $mod+Shift+p move container to workspace number 16
+    bindsym $mod+Shift+bracketleft move container to workspace number 17
+    bindsym $mod+Shift+bracketright move container to workspace number 18
+    bindsym $mod+Shift+7 move container to workspace number 19
+    bindsym $mod+Shift+8 move container to workspace number 20
+    bindsym $mod+Shift+9 move container to workspace number 21
+    bindsym $mod+Shift+0 move container to workspace number 22
+    bindsym $mod+Shift+minus move container to workspace number 23
+    bindsym $mod+Shift+equal move container to workspace number 24
+
+    bindsym 7 exec swaymsg "[app_id=spot] swap container with mark spotify" ; mode "regular"
+    bindsym 8 exec swaymsg "[con_id=213] swap container with mark midi" ; mode "regular"
+}
+
+bindsym $mod+g mode "register"
+
+
+
+
+
+
+
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 
@@ -184,24 +242,55 @@ input type:pointer {
 #for_window [instance="steam"] move container to workspace 12
 #for_window [instance="steamwebhelper" class="steam"] move container to workspace 12
 #for_window [title="discord-screenaudio"] move container to workspace 6
-
+#app_id is for wayland, class is for xwayland, title is anything
 assign [app_id="de.shorsh.discord-screenaudio"] 6
 #assign [class="spotify"] 7
-assign [class="reaper"] 8
-for_window [title="Reaper Keys Feedback"] resize shrink width 55ppt, splitv
+assign [instance="REAPER"] 8
+no_focus [title="Reaper Keys Feedback"] 
+for_window [title="Reaper Keys Feedback"] resize set width 25ppt, splitv
 assign [title="Mixer"] 9
-assign [class="steam"] 12
-for_window [title="Friends List"] resize set width 70ppt, splitv
+#doesnt work
 
+
+
+assign [app_id="steamkitten"] 12
+for_window [app_id="steamkitten"] resize set width 20ppt
+
+assign [class="steam"] 12
+for_window [class="steam"] resize set width 60ppt
+
+assign [title="Friends List"] 12
+for_window [title="Friends List"] resize set width 20ppt, move right
+
+for_window [title="Steam Settings"] floating enable
+
+
+assign [app_id="gamescope"] 11
+no_focus [app_id="gamescope"]
+for_window [app_id="gamescope"] inhibit_idle none, fullscreen enable
+
+#steam games will run as "steam_app_1234567" for class and instance
 #climp
 assign [app_id="spot"] 7
-for_window [app_id="spot"] move left
-assign [app_id="lyr"] 7
-for_window [app_id="lyr"] move right, splitv, move up, resize set width 25ppt, resize set height 65ppt
+for_window [app_id="spot"] resize set width 75ppt, mark --add spot
+
+assign [app_id="lyr"] 7 
+for_window [app_id="lyr"] resize set width 25ppt,
+assign [app_id="vis"] 7
+for_window [app_id="vis"] resize set height 20ppt,
+
+
+#assign [title="Spotify Premium"] 19
+#for_window [title="Spotfiy Premium"] floating enable, move position 0px 0px, resize set width 70ppt, resize set height 80ppt
+#focus_on_window_activation none
+#resize set height 65ppt
 assign [title="imvalbumart"] 7
-for_window [title="imvalbumart"] move right, splitv, move down, resize set width 25ppt
+for_window [title="imvalbumart"] resize set height 35ppt, resize set width 25ppt
 
 
+
+
+focus_follows_mouse no
 
 
 for_window [title="Weston"] fullscreen
@@ -213,7 +302,7 @@ for_window [title="GNU Image Manipulation Program"] fullscreen
 #resize shrink width 55ppt, splitv
 for_window [title="Friends List"] resize shrink width 70ppt, splitv
 ##for_window [title="Rain World"] move container to workspace 7
-
+for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
 
 
 
@@ -263,20 +352,21 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    bindsym $left resize shrink width 5ppt
+    bindsym $down resize grow height 5ppt
+    bindsym $up resize shrink height 5ppt
+    bindsym $right resize grow width 5ppt
 
     # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+    bindsym Left resize shrink width 5ppt
+    bindsym Down resize grow height 5ppt
+    bindsym Up resize shrink height 5ppt
+    bindsym Right resize grow width 5ppt
 
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
 }
 bindsym $mod+r mode "resize"
 
@@ -287,3 +377,10 @@ bar {
 
 include /etc/sway/config.d/*
 
+#MUTE
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym $mod+m exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+#PUSH TO TALK
+#bindsym $mod+space exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 0 # mute mic
+#bindsym --release $mod+space exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1 # unmute mic
